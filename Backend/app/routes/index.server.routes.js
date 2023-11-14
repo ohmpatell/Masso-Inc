@@ -2,19 +2,19 @@ const express = require('express');
 const hotelRouter = express.Router();
 const Hotel = require('../model/hotel.model');
 
-hotelRouter.route('/').get((req, res, next) =>
+hotelRouter.route('/hotel').get((req, res, next) =>
 {
     Hotel.find().then(object => res.status(200).json(object))
         .catch(err => res.status(400).json({ "error": err }))
 });
 
-hotelRouter.route('/:id').get((req, res, next) =>
+hotelRouter.route('/hotel/:id').get((req, res, next) =>
 {
     Hotel.findById(req.params.id).then(object => res.status(200).json(object))
         .catch(err => res.status(400).json({ "error": err }))
 });
 
-hotelRouter.route('/add').post((req, res, next) =>
+hotelRouter.route('/hotel/add').post((req, res, next) =>
 {
     let hotel = new Hotel(req.body)
     hotel.save()
@@ -22,7 +22,7 @@ hotelRouter.route('/add').post((req, res, next) =>
         .catch(err => res.status(400).json({ "error": err }))
 });
 
-hotelRouter.route('/update/:id').post((req, res, next) =>
+hotelRouter.route('/hotel/update/:id').post((req, res, next) =>
 {
     Hotel.findById(req.params.id)
         .then(object =>
@@ -46,7 +46,7 @@ hotelRouter.route('/update/:id').post((req, res, next) =>
         .catch(err => res.status(400).json({ "error": err }))
 });
 
-hotelRouter.route('/delete/:id').delete((req, res, next) =>
+hotelRouter.route('/hotel/delete/:id').delete((req, res, next) =>
 {
     Hotel.findByIdAndDelete(req.params.id)
         .then(object => res.status(200).send("Registry deleted successfully"))

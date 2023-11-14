@@ -16,6 +16,9 @@ let Hotel = new Schema({
     },
     numberOfRooms:{
         type:Number
+    },
+    description:{
+        type:String
     }
 });
 
