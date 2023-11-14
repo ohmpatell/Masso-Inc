@@ -9,10 +9,19 @@ function App() {
   return (
     <Router>
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <Link class="navbar-brand" to="/">
-          MASSO_INC
+        <Link className="navbar-brand" to="/">
+          <img
+            src=".\logo.png"
+            alt="Logo"
+            style={{ width: "80px", marginLeft: "10px" }}
+          />
         </Link>
         <ul class="navbar-nav">
+          <li class="nav-item active">
+            <Link class="nav-link" to="/">
+              Home
+            </Link>
+          </li>
           <li class="nav-item active">
             <Link class="nav-link" to="/hotel/add">
               Add Hotel
