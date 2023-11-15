@@ -11,7 +11,7 @@ export default class AddHotel extends Component {
     this.onChangeEmail = this.onChangeEmail.bind(this);
     this.onChangeNumberOfRooms = this.onChangeNumberOfRooms.bind(this);
     this.onChangeDescription = this.onChangeDescription.bind(this);
-    // this.onChangeFile = this.onChangeFile.bind(this);
+    this.resetValues=this.resetValues.bind(this);    
     this.onSubmit = this.onSubmit.bind(this);
 
     this.state = {
@@ -89,7 +89,6 @@ export default class AddHotel extends Component {
       .then((res) => console.log(res.data))
       .catch((err) => console.log(err));
 
-    // console.log("File: " + this.state.file);
     this.resetValues();
   }
 
@@ -189,28 +188,14 @@ export default class AddHotel extends Component {
               >
                 Submit
               </button>
-              <button
+              <button        
+                type="button"        
                 class="btn btn-secondary"
-                onClick={this.state.resetValues}
+                onClick={this.resetValues}
               >
                 Cancel
               </button>
             </div>
-
-            {/* <div class="form-group">
-              <h4 style={{ color: "gray", paddingLeft: "60px" }}>New Shop</h4>
-              <br />
-              <label>Upload Logo</label>
-              <br />
-              <input
-                type="file"
-                class="form-control-file"
-                id="fileId"
-                accept="image/*"
-                value={this.state.file}
-                onChange={this.onChangeFile}
-              />
-            </div> */}
           </form>
         </div>
       </div>

@@ -28,15 +28,12 @@ hotelRouter.route('/hotel/update/:id').post((req, res, next) =>
         .then(object =>
         {
             //Update the object with new data
-            object.firstName = req.body.firstName;
-            object.lastName = req.body.lastName;
+            object.name = req.body.name;
+            object.location = req.body.location;
             object.phone = req.body.phone;
             object.email = req.body.email;
-            object.semester = req.body.semester;
-            object.yearOfGraduation = req.body.yearOfGraduation;
-            object.currentSubjects = req.body.currentSubjects;
-            object.grades = req.body.grades;
-
+            object.description = req.body.description;
+            object.numberOfRooms = req.body.numberOfRooms;        
             //Save new Data
 
             object.save()
