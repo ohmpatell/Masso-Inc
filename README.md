@@ -16,5 +16,5 @@ Welcome to the Masso Inc Group 3 Web Application Development repository! This pr
 
 The repository is organized as follows:
 
-- **/Backend**: Contains the React.js front-end application.
-- **/Frontend**: Houses the Node.js and Express.js back-end application.
+- **/Frontend**: Contains the React.js front-end application.
+- **/Backend**: Houses the Node.js and Express.js back-end application.
