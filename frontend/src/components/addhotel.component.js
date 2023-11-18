@@ -5,14 +5,9 @@ import "../App.css";
 export default class AddHotel extends Component {
   constructor(props) {
     super(props);
-    this.onChangeName = this.onChangeName.bind(this);
-    this.onChangeLocation = this.onChangeLocation.bind(this);
-    this.onChangePhone = this.onChangePhone.bind(this);
-    this.onChangeEmail = this.onChangeEmail.bind(this);
-    this.onChangeNumberOfRooms = this.onChangeNumberOfRooms.bind(this);
-    this.onChangeDescription = this.onChangeDescription.bind(this);
-    this.resetValues=this.resetValues.bind(this);    
+    this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
+    this.resetValues = this.resetValues.bind(this);
 
     this.state = {
       name: "",
@@ -21,75 +16,48 @@ export default class AddHotel extends Component {
       email: "",
       description: "",
       numberOfRooms: 0,
+      image: null, // New state for handling image
     };
   }
 
-  onChangeName(e) {
+  onChange(e) {
     this.setState({
-      name: e.target.value,
+      [e.target.name]: e.target.value,
     });
   }
 
-  onChangeLocation(e) {
-    this.setState({
-      location: e.target.value,
-    });
-  }
+  onImageChange(e) {
+    const file = e.target.files[0];
 
-  onChangeDescription(e) {
     this.setState({
-      description: e.target.value,
-    });
-  }
-
-  onChangePhone(e) {
-    this.setState({
-      phone: e.target.value,
-    });
-  }
-
-  onChangeEmail(e) {
-    this.setState({
-      email: e.target.value,
-    });
-  }
-
-  onChangeNumberOfRooms(e) {
-    this.setState({
-      numberOfRooms: e.target.value,
-    });
-  }
-
-  onChangePicture(e) {
-    this.setState({
-      picture: e.target.value,
+      image: file,
+      imagePreview: URL.createObjectURL(file), // Set image preview
     });
   }
 
   onSubmit(e) {
     e.preventDefault();
-    console.log("Name: " + this.state.name);
-    console.log("Location: " + this.state.location);
-    console.log("Phone: " + this.state.phone);
-    console.log("Email: " + this.state.email);
-    console.log("Description: " + this.state.description);
-    console.log("Number of rooms: " + this.state.numberOfRooms);
 
-    const newHotel = {
-      name: this.state.name,
-      location: this.state.location,
-      phone: this.state.phone,
-      email: this.state.email,
-      description: this.state.description,
-      numberOfRooms: Number(this.state.numberOfRooms),
-    };
+    const formData = new FormData();
+    formData.append("name", this.state.name);
+    formData.append("location", this.state.location);
+    formData.append("phone", this.state.phone);
+    formData.append("email", this.state.email);
+    formData.append("description", this.state.description);
+    formData.append("numberOfRooms", this.state.numberOfRooms);
+    formData.append("image", this.state.image); // Append the image file
 
     axios
-      .post("http://localhost:8081/hotel/add", newHotel)
-      .then((res) => console.log(res.data))
+      .post("http://localhost:8081/hotel/add", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
+      .then((res) => {
+        console.log(res.data);
+        this.resetValues();
+      })
       .catch((err) => console.log(err));
-
-    this.resetValues();
   }
 
   resetValues() {
@@ -100,6 +68,8 @@ export default class AddHotel extends Component {
       email: "",
       description: "",
       numberOfRooms: 0,
+      image: null,
+      imagePreview: null,
     });
   }
 
@@ -108,89 +78,123 @@ export default class AddHotel extends Component {
       <div className="container" style={{ justifyItems: "center" }}>
         <div className="col-lg-6">
           <form onSubmit={this.onSubmit}>
-            <div class="form-group input">
+            <div className="form-group input">
               <input
                 type="text"
                 placeholder="Name"
-                class="customInput"
+                className="customInput"
+                name="name"
                 value={this.state.name}
-                onChange={this.onChangeName}
+                onChange={this.onChange}
               />
             </div>
 
             <br />
 
-            <div class="form-group input">
+            <div className="form-group input">
               <input
                 type="text"
                 placeholder="Description"
-                class="customInput"
+                className="customInput"
+                name="description"
                 value={this.state.description}
-                onChange={this.onChangeDescription}
+                onChange={this.onChange}
               />
             </div>
 
             <br />
 
-            <div class="form-group input">
+            <div className="form-group input">
               <input
                 type="text"
                 placeholder="Location"
-                class="customInput"
+                className="customInput"
+                name="location"
                 value={this.state.location}
-                onChange={this.onChangeLocation}
+                onChange={this.onChange}
               />
             </div>
 
             <br />
 
-            <div class="form-group input">
+            <div className="form-group input">
               <input
                 type="text"
                 placeholder="Phone"
-                class="customInput"
+                className="customInput"
+                name="phone"
                 value={this.state.phone}
-                onChange={this.onChangePhone}
+                onChange={this.onChange}
               />
             </div>
 
             <br />
 
-            <div class="form-group input">
+            <div className="form-group input">
               <input
                 type="text"
                 placeholder="Email"
-                class="customInput"
+                className="customInput"
+                name="email"
                 value={this.state.email}
-                onChange={this.onChangeEmail}
+                onChange={this.onChange}
               />
             </div>
 
             <br />
 
-            <div class="form-group input">
+            <div className="form-group input">
               <input
                 type="text"
                 placeholder="NumberOfRooms"
-                class="customInput"
+                className="customInput"
+                name="numberOfRooms"
                 value={this.state.numberOfRooms}
-                onChange={this.onChangeNumberOfRooms}
+                onChange={this.onChange}
               />
             </div>
 
             <br />
 
-            <div class="formButtonsContainer">
+            <div className="form-group input">
+              
+              <div className="custom-file">
+                <input
+                  type="file"
+                  className="custom-file-input"
+                  name="image"
+                  id="image"
+                  onChange={(e) => this.onImageChange(e)}
+                  style={{ cursor: "pointer", display: "none" }}
+                />
+                <label className="custom-file-label" htmlFor="image" style={{cursor: "pointer"}}>
+                  Choose Image
+                </label>
+              </div>
+              {this.state.imagePreview && (
+                <div className="image-preview">
+                  <img
+                    src={this.state.imagePreview}
+                    alt="Preview"
+                    style={{ maxWidth: "100px", maxHeight: "100px" }}
+                  />
+                </div>
+              )}
+            </div>
+
+            <br />
+
+            <div className="formButtonsContainer">
               <button
                 type="submit"
-                class="btn btn-primary"
+                className="btn btn-primary"
                 style={{ marginRight: "20px" }}
               >
                 Submit
               </button>
-              <button        
-                type="button"        
-                class="btn btn-secondary"
+              <button
+                type="button"
+                className="btn btn-secondary"
                 onClick={this.resetValues}
               >
                 Cancel
