@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Registration from "./registration.component";
 
 const LandingPage = () => {
   return (
@@ -10,6 +11,7 @@ const LandingPage = () => {
       <img src="url_immagine_hotel" alt="Immagine Hotel" />
       <br />
       */}
+      <Registration />
       <Link to="/hotel" className="btn btn-primary">
         Find Hotel
       </Link>
