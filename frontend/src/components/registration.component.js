@@ -1,169 +1,145 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 
-export default class Registration extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      showLoginForm: false,
-      showRegisterForm: false,
-    };
-  }
+const Registration = () => {
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
+  const [formErrors, setFormErrors] = useState({});
 
-  toggleLoginFormVisibility = () => {
-    this.setState((prevState) => ({
-      showLoginForm: !prevState.showLoginForm,
-      showRegisterForm: false,
+  const validateEmail = (email) => {
+    const emailRegex = /^\S+@\S+\.\S+$/;
+    return emailRegex.test(email);
+  };
+
+  const validatePassword = (password) => {
+    const passwordRegex = /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[A-Z]).{8,}$/;
+    return passwordRegex.test(password);
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
     }));
   };
 
-  toggleRegisterFormVisibility = () => {
-    this.setState((prevState) => ({
-      showRegisterForm: !prevState.showRegisterForm,
-      showLoginForm: false,
-    }));
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    let errors = {};
+
+    if (!formData.firstName) {
+      errors.firstName = "First name is required";
+    }
+
+    if (!formData.lastName) {
+      errors.lastName = "Last name is required";
+    }
+
+    if (!formData.email || !validateEmail(formData.email)) {
+      errors.email = "Please enter a valid email";
+    }
+
+    if (!formData.password || !validatePassword(formData.password)) {
+      errors.password =
+        "Password must be at least 8 characters long and include at least one number, one symbol, and one uppercase letter";
+    }
+
+    if (formData.password !== formData.confirmPassword) {
+      errors.confirmPassword = "Passwords do not match";
+    }
+
+    setFormErrors(errors);
+
+    if (Object.keys(errors).length === 0) {
+      console.log("Form data submitted:", formData);
+      // Here handle the form submission - sending data to a server
+    }
   };
 
-  render() {
-    return (
-      <div className="col-md-2">
-        <button
-          type="button"
-          class="btn btn-primary btn-block mb-4"
-          onClick={this.toggleLoginFormVisibility}
-        >
-          Login
-        </button>
-
-        {this.state.showLoginForm && (
-          <form>
-            <div className="form-outline mb-4">
-              <input type="email" id="form2Example1" class="form-control" />
-              <label class="form-label" for="form2Example1">
-                Email address
-              </label>
-            </div>
-
-            <div className="form-outline mb-4">
-              <input type="password" id="form2Example2" class="form-control" />
-              <label className="form-label" for="form2Example2">
-                Password
-              </label>
-            </div>
-
-            <button type="button" className="btn btn-primary btn-block mb-4">
-              Sign in
-            </button>
-
-            <div className="text-center">
-              <p>
-                Not a member?{" "}
-                <a href="#!" onClick={this.toggleRegisterFormVisibility}>
-                  Register
-                </a>
-              </p>
-            </div>
-          </form>
-        )}
-
-        {this.state.showRegisterForm && (
-          <form className="needs-validation" noValidate>
-            <div className="form-row">
-              <div className="col-md-4 mb-3">
-                <label htmlFor="validationTooltip01">First name</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="validationTooltip01"
-                  placeholder="First name"
-                  value="Mark"
-                  required
-                />
-                <div className="valid-tooltip">Looks good!</div>
-              </div>
-              <div className="col-md-4 mb-3">
-                <label htmlFor="validationTooltip02">Last name</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="validationTooltip02"
-                  placeholder="Last name"
-                  value="Otto"
-                  required
-                />
-                <div className="valid-tooltip">Looks good!</div>
-              </div>
-              <div className="col-md-4 mb-3">
-                <label htmlFor="validationTooltipUsername">Username</label>
-                <div className="input-group">
-                  <div className="input-group-prepend">
-                    <span
-                      className="input-group-text"
-                      id="validationTooltipUsernamePrepend"
-                    >
-                      @
-                    </span>
-                  </div>
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="validationTooltipUsername"
-                    placeholder="Username"
-                    aria-describedby="validationTooltipUsernamePrepend"
-                    required
-                  />
-                  <div className="invalid-tooltip">
-                    Please choose a unique and valid username.
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="form-row">
-              <div className="col-md-6 mb-3">
-                <label htmlFor="validationTooltip03">City</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="validationTooltip03"
-                  placeholder="City"
-                  required
-                />
-                <div className="invalid-tooltip">
-                  Please provide a valid city.
-                </div>
-              </div>
-              <div className="col-md-3 mb-3">
-                <label htmlFor="validationTooltip04">State</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="validationTooltip04"
-                  placeholder="State"
-                  required
-                />
-                <div className="invalid-tooltip">
-                  Please provide a valid state.
-                </div>
-              </div>
-              <div className="col-md-3 mb-3">
-                <label htmlFor="validationTooltip05">Zip</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="validationTooltip05"
-                  placeholder="Zip"
-                  required
-                />
-                <div className="invalid-tooltip">
-                  Please provide a valid zip.
-                </div>
-              </div>
-            </div>
-            <button className="btn btn-primary" type="submit">
-              Submit form
-            </button>
-          </form>
+  return (
+    <form onSubmit={handleSubmit}>
+      <div className="form-outline mb-4">
+        <label htmlFor="firstName">First Name</label>
+        <input
+          type="text"
+          className={`form-control ${formErrors.firstName ? "is-invalid" : ""}`}
+          id="firstName"
+          name="firstName"
+          value={formData.firstName}
+          onChange={handleChange}
+        />
+        {formErrors.firstName && (
+          <div className="invalid-feedback">{formErrors.firstName}</div>
         )}
       </div>
-    );
-  }
-}
+      <div className="form-outline mb-4">
+        <label htmlFor="lastName">Last Name</label>
+        <input
+          type="text"
+          className={`form-control ${formErrors.lastName ? "is-invalid" : ""}`}
+          id="lastName"
+          name="lastName"
+          value={formData.lastName}
+          onChange={handleChange}
+        />
+        {formErrors.lastName && (
+          <div className="invalid-feedback">{formErrors.lastName}</div>
+        )}
+      </div>
+      <div className="form-outline mb-4">
+        <label htmlFor="email">Email</label>
+        <input
+          type="email"
+          className={`form-control ${formErrors.email ? "is-invalid" : ""}`}
+          id="email"
+          name="email"
+          value={formData.email}
+          onChange={handleChange}
+        />
+        {formErrors.email && (
+          <div className="invalid-feedback">{formErrors.email}</div>
+        )}
+      </div>
+      <div className="form-outline mb-4">
+        <label htmlFor="password">Password</label>
+        <input
+          type="password"
+          className={`form-control ${formErrors.password ? "is-invalid" : ""}`}
+          id="password"
+          name="password"
+          value={formData.password}
+          onChange={handleChange}
+        />
+        {formErrors.password && (
+          <div className="invalid-feedback">{formErrors.password}</div>
+        )}
+      </div>
+      <div className="form-outline mb-4">
+        <label htmlFor="confirmPassword">Confirm Password</label>
+        <input
+          type="password"
+          className={`form-control ${
+            formErrors.confirmPassword ? "is-invalid" : ""
+          }`}
+          id="confirmPassword"
+          name="confirmPassword"
+          value={formData.confirmPassword}
+          onChange={handleChange}
+        />
+        {formErrors.confirmPassword && (
+          <div className="invalid-feedback">{formErrors.confirmPassword}</div>
+        )}
+      </div>
+      <button type="submit" className="btn btn-primary">
+        Register
+      </button>
+    </form>
+  );
+};
+
+export default Registration;

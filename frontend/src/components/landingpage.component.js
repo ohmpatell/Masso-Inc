@@ -1,8 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import Registration from "./registration.component";
+import Login from "./login.component";
 
 const LandingPage = () => {
+  const [showFindHotel, setShowFindHotel] = useState(true);
+
+  const handleLoginToggle = (isFormVisible) => {
+    setShowFindHotel(!isFormVisible);
+  };
+
   return (
     <div>
       <h1>Welcome to the Hotel Bookings Web Application</h1>
@@ -11,10 +17,12 @@ const LandingPage = () => {
       <img src="url_immagine_hotel" alt="Immagine Hotel" />
       <br />
       */}
-      <Registration />
-      <Link to="/hotel" className="btn btn-primary">
-        Find Hotel
-      </Link>
+      <Login onLoginToggle={handleLoginToggle} />
+      {showFindHotel && (
+        <Link to="/hotel" className="btn btn-primary">
+          Find Hotel
+        </Link>
+      )}
     </div>
   );
 };
