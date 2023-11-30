@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const HotelCard = ({ hotel }) => {
   const [reviewText, setReviewText] = useState('');
   const [reviews, setReviews] = useState([]);
   const [showInput, setShowInput] = useState(false);
+
+  const navigate = useNavigate();
 
   // Fetch reviews when the component mounts or when the hotel id changes
   useEffect(() => {
@@ -55,7 +58,10 @@ const HotelCard = ({ hotel }) => {
     }
   };
   
-  
+  const handleEditHotel = () => {
+    navigate(`/edit/${hotel._id}`);
+  };
+
     
   return (
     <div className='container mt-5'>
@@ -96,6 +102,7 @@ const HotelCard = ({ hotel }) => {
                   <button onClick={handleSubmitReview} className='btn btn-primary mt-3'>Submit</button>
                 </div>
               )}
+              <button onClick={handleEditHotel} className='btn btn-warning mt-3 ml-3'>Edit</button>
             </div>
           )}
         </div>

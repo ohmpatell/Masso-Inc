@@ -4,6 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import AddHotel from "./components/addhotel.component";
 import HotelLists from "./components/hotellists.component";
 import LandingPage from "./components/landingpage.component";
+import EditHotel from "./components/edithotel";
 
 function App() {
   return (
@@ -38,6 +39,7 @@ function App() {
         <Route path="/" Component={LandingPage} />
         <Route path="/hotel/add" Component={AddHotel} />
         <Route path="/hotel" Component={HotelLists} />
+        <Route path="/edit/:id" element={<EditHotel />} />
       </Routes>
     </Router>
   );
