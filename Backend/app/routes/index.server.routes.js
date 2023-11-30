@@ -106,4 +106,41 @@ hotelRouter.route('/hotel/reviews/:id').get((req, res, next) => {
         .catch(err => res.status(400).json({ "error": err }));
 });
 
+
+
+// ...
+
+// Edit a hotel by ID
+hotelRouter.route('/hotel/edit/:id').put(upload.single('image'), (req, res, next) => {
+    const { name, location, phone, email, description, numberOfRooms } = req.body;
+
+    Hotel.findById(req.params.id)
+        .then(hotel => {
+            if (!hotel) {
+                return res.status(404).json({ "error": "Hotel not found" });
+            }
+
+            // Update the hotel with new data
+            hotel.name = name;
+            hotel.location = location;
+            hotel.phone = phone;
+            hotel.email = email;
+            hotel.description = description;
+            hotel.numberOfRooms = numberOfRooms;
+
+            // Check if a file is uploaded
+            if (req.file) {
+                hotel.image = req.file.buffer; // Save the image as a Buffer
+            }
+
+            // Save new Data
+            hotel.save()
+                .then(updatedHotel => res.status(200).json(updatedHotel))
+                .catch(err => res.status(400).json({ "error": err }));
+        })
+        .catch(err => res.status(400).json({ "error": err }));
+});
+
+
+
 module.exports = hotelRouter;
