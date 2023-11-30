@@ -19,8 +19,8 @@ connection.once('open',()=>{
     console.log("DB connected......")
 })
 
-app.use('/', hotelRoutes);
-app.use('/', userRoutes);
+app.use('/api/hotel', hotelRoutes);
+app.use('/api/user', userRoutes);
 
 app.listen(8081,()=>{
     console.log("Server is running on 8081....");

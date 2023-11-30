@@ -4,9 +4,10 @@ const {
   getHotel,
   deleteHotel,
   addHotel,
-  updateHotel
+  updateHotel,
 } = require("../controllers/index.server.controller.hotel");
 
+const requireAuth = require("../middleware/requireAuth");
 const multer = require("multer");
 const hotelRouter = express.Router();
 
@@ -14,16 +15,19 @@ const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
 
 // Get all hotels
-hotelRouter.route("/hotel").get(getHotels);
+hotelRouter.route("/").get(getHotels);
 //Get hotel by ID
-hotelRouter.route("/hotel/:id").get(getHotel);
+hotelRouter.route("/:id").get(getHotel);
+
+//Require auth for all the hotel edition operations routes
+hotelRouter.use(requireAuth);
 //Add hotel with image
-hotelRouter.route("/hotel/add").post(upload.single("image"), addHotel);
+hotelRouter.route("/add").post(upload.single("image"), addHotel);
 //Update hotel
 hotelRouter
-  .route("/hotel/update/:id")
+  .route("/update/:id")
   .post(upload.single("image"), updateHotel);
 //Delete hotel
-hotelRouter.route("/hotel/delete/:id").delete(deleteHotel);
+hotelRouter.route("/delete/:id").delete(deleteHotel);
 
 module.exports = hotelRouter;

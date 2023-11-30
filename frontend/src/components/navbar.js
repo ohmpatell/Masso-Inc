@@ -25,11 +25,13 @@ const Navbar = () => {
             Home
           </Link>
         </li>
+        {user && (
         <li class="nav-item active">
           <Link class="nav-link" to="/hotel/add">
             Add Hotel
           </Link>
         </li>
+        )}
         <li class="nav-item active">
           <Link class="nav-link" to="/hotel">
             Hotel List
