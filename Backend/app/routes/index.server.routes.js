@@ -74,4 +74,36 @@ hotelRouter.route('/hotel/delete/:id').delete((req, res, next) => {
         .catch(err => res.status(400).json({ "error": err }));
 });
 
+// Add a review to a hotel
+hotelRouter.route('/hotel/review/:id').post(async (req, res) => {
+    try {
+        const hotel = await Hotel.findById(req.params.id);
+        if (!hotel) {
+            return res.status(404).send("Hotel not found");
+        }
+        
+        const newReview = {
+            text: req.body.text,
+            createdAt: new Date()
+        };
+        hotel.reviews.push(newReview);
+        
+        await hotel.save();
+        res.json(newReview); // Send back the new review object
+    } catch (error) {
+        console.error('Error adding review:', error);
+        res.status(500).send("Failed to add review");
+    }
+});
+
+// Get reviews for a hotel
+hotelRouter.route('/hotel/reviews/:id').get((req, res, next) => {
+    Hotel.findById(req.params.id)
+        .then(hotel => {
+            // Return the reviews of the hotel
+            res.status(200).json(hotel.reviews);
+        })
+        .catch(err => res.status(400).json({ "error": err }));
+});
+
 module.exports = hotelRouter;
