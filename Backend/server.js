@@ -3,7 +3,8 @@ const app = express();
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const mongoose = require('mongoose');
-const hotelRoutes= require('./app/routes/index.server.routes');
+const hotelRoutes= require('./app/routes/index.server.routes.hotel');
+const userRoutes= require('./app/routes/index.server.routes.user');
 
 
 app.use(cors());
@@ -19,6 +20,7 @@ connection.once('open',()=>{
 })
 
 app.use('/', hotelRoutes);
+app.use('/', userRoutes);
 
 app.listen(8081,()=>{
     console.log("Server is running on 8081....");
