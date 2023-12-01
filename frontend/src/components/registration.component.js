@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useSignup } from "../hooks/useSignup";
 
 const Registration = () => {
   const [formData, setFormData] = useState({
@@ -9,6 +10,7 @@ const Registration = () => {
     confirmPassword: "",
   });
   const [formErrors, setFormErrors] = useState({});
+  const { signup, error, isLoading } = useSignup();
 
   const validateEmail = (email) => {
     const emailRegex = /^\S+@\S+\.\S+$/;
@@ -28,7 +30,7 @@ const Registration = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     let errors = {};
 
@@ -56,6 +58,7 @@ const Registration = () => {
     setFormErrors(errors);
 
     if (Object.keys(errors).length === 0) {
+      await signup(formData.email,formData.password);
       console.log("Form data submitted:", formData);
       // Here handle the form submission - sending data to a server
     }
@@ -135,9 +138,10 @@ const Registration = () => {
           <div className="invalid-feedback">{formErrors.confirmPassword}</div>
         )}
       </div>
-      <button type="submit" className="btn btn-primary">
+      <button disabled={isLoading} type="submit" className="btn btn-primary">
         Register
       </button>
+      {error && <div className="error">{error}</div>}
     </form>
   );
 };

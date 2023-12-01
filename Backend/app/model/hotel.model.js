@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-let Hotel = new Schema({
+let hotelSchema = new Schema({
     name: {
         type: String
     },
@@ -35,4 +35,4 @@ let Hotel = new Schema({
     }]
 });
 
-module.exports = mongoose.model('Hotel', Hotel);
+module.exports = mongoose.model('Hotel', hotelSchema);

@@ -2,10 +2,11 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { useAuthContext } from "../hooks/useAuthContext";
 
 const EditHotel = () => {
   const { id } = useParams();
-    const navigate = useNavigate();
+  const navigate = useNavigate();
   const [hotel, setHotel] = useState({
     name: "",
     location: "",
@@ -16,18 +17,15 @@ const EditHotel = () => {
     image: null,
     imagePreview: null,
     hotelId: id,
-
-    
   });
-
-  
+  const { user } = useAuthContext();
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8081/hotel/${id}`)
+      .get(`http://localhost:8081/api/hotel/${id}`)
       .then((res) => {
         const hotelData = res.data;
-        console.log("API RESPONCE: " + hotelData);
+        console.log("API RESPONSE: " + hotelData);
         setHotel({
           name: hotelData.name,
           location: hotelData.location,
@@ -40,7 +38,6 @@ const EditHotel = () => {
             : null,
         });
         console.log("IDD: " + id);
-
       })
       .catch((err) => console.log(err));
   }, [id]);
@@ -65,6 +62,11 @@ const EditHotel = () => {
   const onSubmit = (e) => {
     e.preventDefault();
 
+    if(!user){
+      alert('You must be logged in');
+      return;
+    }
+
     const formData = new FormData();
     formData.append("name", hotel.name);
     formData.append("location", hotel.location);
@@ -75,9 +77,10 @@ const EditHotel = () => {
     formData.append("image", hotel.image);
 
     axios
-      .put(`http://localhost:8081/hotel/edit/${id}`, formData, {
+      .put(`http://localhost:8081/api/hotel/update/${id}`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
+          'Authorization': `Bearer ${user.token}`,
         },
       })
       .then((res) => {
@@ -102,6 +105,11 @@ const EditHotel = () => {
       hotelId: id,
     });
   };
+
+  const cancelEdit=()=>{
+    resetValues();
+    navigate("/hotel");
+  }
 
   return (
     <div className="container" style={{ justifyItems: "center" }}>
@@ -205,7 +213,7 @@ const EditHotel = () => {
             <button
               type="button"
               className="btn btn-secondary"
-              onClick={resetValues}
+              onClick={cancelEdit}
             >
               Cancel
             </button>
