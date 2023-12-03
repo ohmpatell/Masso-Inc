@@ -10,14 +10,14 @@ export default class HotelLists extends Component {
 
   componentDidMount() {
     axios
-      .get("http://localhost:8081/hotel")
+      .get("http://localhost:8081/api/hotel")
       .then((res) => this.setState({ hotels: res.data }))
       .catch((err) => console.log(err));
   }
 
   componentDidUpdate() {
     axios
-      .get("http://localhost:8081/hotel")
+      .get("http://localhost:8081/api/hotel")
       .then((res) => this.setState({ hotels: res.data }))
       .catch((err) => console.log(err));
   }
