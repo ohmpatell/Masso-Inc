@@ -37,6 +37,11 @@ const Navbar = () => {
             Hotel List
           </Link>
         </li>
+        <li class="nav-item active">
+          <Link class="nav-link" to="/hotel/created">
+            My Hotels
+          </Link>
+        </li>
       </ul>
       {user && (
         <div>

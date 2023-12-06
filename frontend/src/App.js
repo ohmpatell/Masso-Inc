@@ -9,6 +9,7 @@ import EditHotel from "./components/edithotel";
 import Login from "./components/login.component";
 import Registration from "./components/registration.component";
 import { useAuthContext } from "../src/hooks/useAuthContext";
+import CreatedHotelList from "./components/createdHotelList.component";
 
 function App() {
 const {user}= useAuthContext();
@@ -20,6 +21,7 @@ const {user}= useAuthContext();
         <Route path="/" element={<LandingPage/>} />
         <Route path="/hotel/add" element={user? <AddHotel /> : <Navigate to="/login"/>} />
         <Route path="/hotel" element={<HotelLists/>} />
+        <Route path="/hotel/created" element={<CreatedHotelList/>} />
         <Route path="/hotel/update/:id" element={user? <EditHotel /> : <Navigate to="/login"/>} />
         <Route path="/login" element={!user? <Login /> : <Navigate to="/"/>} />
         <Route path="/signup" element={!user? <Registration /> : <Navigate to="/"/>} />
