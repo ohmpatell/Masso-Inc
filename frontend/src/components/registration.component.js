@@ -11,6 +11,7 @@ const Registration = () => {
   });
   const [formErrors, setFormErrors] = useState({});
   const { signup, error, isLoading } = useSignup();
+  const [accountType,setAccountType]=useState({});
 
   const validateEmail = (email) => {
     const emailRegex = /^\S+@\S+\.\S+$/;
@@ -29,6 +30,16 @@ const Registration = () => {
       [name]: value,
     }));
   };
+
+  const registerAsCustomer=()=>{    
+    setAccountType("Customer");    
+    alert("SubmitCustomer");    
+  }
+
+  const registerAsHotelOwner=()=>{    
+    setAccountType("HotelOwner");    
+    alert("SubmitHotelOwner");    
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -56,16 +67,15 @@ const Registration = () => {
     }
 
     setFormErrors(errors);
-
+    
     if (Object.keys(errors).length === 0) {
-      await signup(formData.email,formData.password);
+      await signup(formData.firstName,formData.lastName, formData.email,formData.password, accountType);
       console.log("Form data submitted:", formData);
-      // Here handle the form submission - sending data to a server
     }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form id="myForm" onSubmit={handleSubmit}>
       <div className="form-outline mb-4">
         <label htmlFor="firstName">First Name</label>
         <input
@@ -137,9 +147,12 @@ const Registration = () => {
         {formErrors.confirmPassword && (
           <div className="invalid-feedback">{formErrors.confirmPassword}</div>
         )}
-      </div>
-      <button disabled={isLoading} type="submit" className="btn btn-primary">
-        Register
+      </div>      
+      <button disabled={isLoading} className="btn btn-primary" onClick={registerAsCustomer}>
+        Register As Customer
+      </button>
+      <button disabled={isLoading} className="btn btn-primary" onClick={registerAsHotelOwner}>
+        Register As HotelOwner
       </button>
       {error && <div className="error">{error}</div>}
     </form>

@@ -13,10 +13,9 @@ const getHotel = (req, res, next) => {
     .catch((err) => res.status(400).json({ error: err }));
 };
 // Get created hotels (Hotel owners account)
-const getCreatedHotels = (req, res, next) => {
-  // console.log(req);
-  const userId=req.user._id;
-  Hotel.find({userId})
+const getCreatedHotels = (req, res, next) => {  
+  const creatorUserId=req.user._id;
+  Hotel.find({creatorUserId})
     .then((hotel) => res.status(200).json(hotel))
     .catch((err) => res.status(400).json({ error: err }));
 };
@@ -24,7 +23,7 @@ const getCreatedHotels = (req, res, next) => {
 //Add hotel with image
 const addHotel = (req, res, next) => {
   const { name, location, phone, email, description, numberOfRooms } = req.body;
-  const userId = req.user._id;
+  const creatorUserId = req.user._id;
 
   let hotel = new Hotel({
     name,
@@ -35,7 +34,7 @@ const addHotel = (req, res, next) => {
     numberOfRooms,
     // Check if a file is uploaded
     image: req.file ? req.file.buffer : undefined,
-    userId
+    creatorUserId
   });
 
   hotel

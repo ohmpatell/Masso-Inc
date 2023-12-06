@@ -35,7 +35,7 @@ let hotelSchema = new Schema({
       },
     },
   ],
-  userId: {
+  creatorUserId: {
     type: String,
     required: true,
   },

@@ -10,6 +10,14 @@ const Navbar = () => {
     logout();
   };
 
+  const isUserCustomer = () => {
+    return user && user.accountType != null && user.accountType === "Customer";
+  };
+
+  const isUserHotelOwner = () => {
+    return user && user.accountType != null && user.accountType === "HotelOwner";
+  };
+
   return (
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <Link className="navbar-brand" to="/">
@@ -25,35 +33,48 @@ const Navbar = () => {
             Home
           </Link>
         </li>
-        {user && (
-        <li class="nav-item active">
-          <Link class="nav-link" to="/hotel/add">
-            Add Hotel
-          </Link>
-        </li>
+        {user && isUserHotelOwner() && (
+          <div>
+            <ul class="navbar-nav">
+              <li class="nav-item active">
+                <Link class="nav-link" to="/hotel/add">
+                  Add Hotel
+                </Link>
+              </li>
+              <li class="nav-item active">
+                <Link class="nav-link" to="/hotel/created">
+                  My Hotels
+                </Link>
+              </li>
+            </ul>
+          </div>
         )}
-        <li class="nav-item active">
-          <Link class="nav-link" to="/hotel">
-            Hotel List
-          </Link>
-        </li>
-        <li class="nav-item active">
-          <Link class="nav-link" to="/hotel/created">
-            My Hotels
-          </Link>
-        </li>
+        {user && isUserCustomer() && (
+          <div>
+            <li class="nav-item active">
+              <Link class="nav-link" to="/hotel">
+                Hotels
+              </Link>
+            </li>
+            <li class="nav-item active">
+              <Link class="nav-link" to="/hotel/created">
+                My Bookings
+              </Link>
+            </li>
+          </div>
+        )}
       </ul>
       {user && (
         <div>
-          <span>{user.email}</span>
+          <span>Hello, {user.firstName} {user.lastName}</span>
           <button onClick={handleClick}>Log out</button>
         </div>
       )}
       {!user && (
-      <div>
-        <Link to="/login">Login </Link>        
-        <Link to="/signup">Signup </Link>
-      </div>
+        <div>
+          <Link to="/login">Login </Link>
+          <Link to="/signup">Signup </Link>
+        </div>
       )}
     </nav>
   );

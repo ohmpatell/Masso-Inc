@@ -74,7 +74,7 @@ const HotelCard = ({ hotel }) => {
     navigate(`/hotel/update/${hotel._id}`);
   };
 
-  const handleRemoveHotel=()=>{
+  const handleRemoveHotel = () => {
     if (!user) {
       alert("You must be logged in");
       return;
@@ -87,10 +87,16 @@ const HotelCard = ({ hotel }) => {
         },
       })
       .then((res) => {
-        alert("Hotel deleted successfully");        
+        alert("Hotel deleted successfully");
       })
       .catch((err) => console.log(err));
-  }
+  };
+
+  const isUserHotelOwner = () => {
+    return (
+      user && user.accountType != null && user.accountType === "HotelOwner"
+    );
+  };
 
   return (
     <div className="container mt-5">
@@ -141,21 +147,21 @@ const HotelCard = ({ hotel }) => {
                   </button>
                 </div>
               )}
-              {user && (
-                <button
-                  onClick={handleEditHotel}
-                  className="btn btn-warning mt-3 ml-3"
-                >
-                  Edit
-                </button>                
-              )}
-              {user && (
-                <button
-                  onClick={handleRemoveHotel}
-                  className="btn btn-danger mt-3 ml-3"
-                >
-                  Delete
-                </button>                
+              {user && isUserHotelOwner() && (
+                <div>
+                  <button
+                    onClick={handleEditHotel}
+                    className="btn btn-warning mt-3 ml-3"
+                  >
+                    Edit
+                  </button>
+                  <button
+                    onClick={handleRemoveHotel}
+                    className="btn btn-danger mt-3 ml-3"
+                  >
+                    Delete
+                  </button>
+                </div>
               )}
             </div>
           )}

@@ -21,7 +21,7 @@ const {user}= useAuthContext();
         <Route path="/" element={<LandingPage/>} />
         <Route path="/hotel/add" element={user? <AddHotel /> : <Navigate to="/login"/>} />
         <Route path="/hotel" element={<HotelLists/>} />
-        <Route path="/hotel/created" element={<CreatedHotelList/>} />
+        <Route path="/hotel/created" element={user? <CreatedHotelList /> : <Navigate to="/login"/>} />
         <Route path="/hotel/update/:id" element={user? <EditHotel /> : <Navigate to="/login"/>} />
         <Route path="/login" element={!user? <Login /> : <Navigate to="/"/>} />
         <Route path="/signup" element={!user? <Registration /> : <Navigate to="/"/>} />
