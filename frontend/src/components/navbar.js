@@ -51,7 +51,6 @@ const Navbar = () => {
         )}
         {user && isUserCustomer() && (
           <div>
-            <ul class="navbar-nav">
             <li class="nav-item active">
               <Link class="nav-link" to="/hotel">
                 Hotels
@@ -62,7 +61,6 @@ const Navbar = () => {
                 My Bookings
               </Link>
             </li>
-            </ul>
           </div>
         )}
       </ul>
