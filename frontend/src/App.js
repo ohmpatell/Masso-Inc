@@ -1,7 +1,7 @@
 import { Route, BrowserRouter as Router, Routes, Navigate } from "react-router-dom";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Navbar from "./components/navbar";
+import NavBar from "./components/NavBar";
 import AddHotel from "./components/addhotel.component";
 import HotelLists from "./components/hotellists.component";
 import LandingPage from "./components/landingpage.component";
@@ -15,7 +15,7 @@ const {user}= useAuthContext();
 
   return (
     <Router>
-      <Navbar/>
+      <NavBar/>
       <Routes>
         <Route path="/" element={<LandingPage/>} />
         <Route path="/hotel/add" element={user? <AddHotel /> : <Navigate to="/login"/>} />

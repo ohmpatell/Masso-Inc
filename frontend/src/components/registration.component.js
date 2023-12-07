@@ -65,6 +65,14 @@ const Registration = () => {
   };
 
   return (
+    
+    <div className="container mt-5">
+      <div className="row justify-content-center">
+        <div className="col-md-6">
+
+
+
+
     <form onSubmit={handleSubmit}>
       <div className="form-outline mb-4">
         <label htmlFor="firstName">First Name</label>
@@ -143,6 +151,10 @@ const Registration = () => {
       </button>
       {error && <div className="error">{error}</div>}
     </form>
+  </div>
+  </div>
+  </div>
+  
   );
 };
 

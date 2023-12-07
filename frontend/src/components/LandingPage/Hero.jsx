@@ -1,79 +1,12 @@
 // HeroSection.js
 import React from "react";
 import "./Hero.css";
-import { Link } from "react-router-dom";
+import "../NavBar";
+//import NavBar from "../NavBar";
 
 const Hero = () => {
   return (
     <div className="home-section">
-      <div className="navbar-container" style={{ height: "10vh" }}>
-        <nav
-          className="navbar navbar-expand-lg navbar-light"
-          style={{ height: "100%" }}
-        >
-          <a className="navbar-brand" href="@">
-            <img
-              src="logo.png"
-              width="100"
-              height="70"
-              className="d-inline-block align-top"
-              alt=""
-              loading="lazy"
-            />
-          </a>
-          <button
-            className="navbar-toggler"
-            type="button"
-            data-toggle="collapse"
-            data-target="#navbarNav"
-            aria-controls="navbarNav"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span className="navbar-toggler-icon"></span>
-          </button>
-          <div className="collapse navbar-collapse" id="navbarNav">
-            <ul className="navbar-nav ml-auto">
-              <li className="nav-item">
-                <a className="nav-link" href="@">
-                  Home
-                </a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="@">
-                  About
-                </a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="@">
-                  Best Offers
-                </a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="@">
-                  Contact
-                </a>
-              </li>
-              <li className="nav-item active">
-                <Link className="nav-link" to="/hotel/add">
-                  Add Hotel
-                </Link>
-              </li>
-              <li className="nav-item active">
-                <Link className="nav-link" to="/hotel">
-                  Hotel List
-                </Link>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link btn btn-warning ml-1" href="@">
-                  Login
-                </a>
-              </li>
-            </ul>
-          </div>
-        </nav>
-      </div>
-
       <div className="hero-section">
         <div className="container hero-container">
           <div className="hero-text">
