@@ -98,9 +98,17 @@ const HotelCard = ({ hotel }) => {
     );
   };
 
+  const handleCardClick = () => {
+    if (!user) {
+      alert("Login for reservation");
+      return;
+    }
+    navigate(`/reservation/${hotel._id}`);
+  };
+
   return (
     <div className="container mt-5">
-      <div className="card">
+      <div className="card clickable-card hover" onClick={handleCardClick}>
         <div className="card-body d-flex justify-content-between">
           {/* Left Side: Information */}
           <div style={{ maxWidth: "70%" }}>
