@@ -15,11 +15,13 @@ const Navbar = () => {
   };
 
   const isUserHotelOwner = () => {
-    return user && user.accountType != null && user.accountType === "HotelOwner";
+    return (
+      user && user.accountType != null && user.accountType === "HotelOwner"
+    );
   };
 
   return (
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <Link className="navbar-brand" to="/">
         <img
           src=".\logo.png"
@@ -27,22 +29,22 @@ const Navbar = () => {
           style={{ width: "80px", marginLeft: "10px" }}
         />
       </Link>
-      <ul class="navbar-nav">
-        <li class="nav-item active">
-          <Link class="nav-link" to="/">
+      <ul className="navbar-nav">
+        <li className="nav-item active">
+          <Link className="nav-link" to="/">
             Home
           </Link>
         </li>
         {user && isUserHotelOwner() && (
           <div>
-            <ul class="navbar-nav">
-              <li class="nav-item active">
-                <Link class="nav-link" to="/hotel/add">
+            <ul className="navbar-nav">
+              <li className="nav-item active">
+                <Link className="nav-link" to="/hotel/add">
                   Add Hotel
                 </Link>
               </li>
-              <li class="nav-item active">
-                <Link class="nav-link" to="/hotel/created">
+              <li className="nav-item active">
+                <Link className="nav-link" to="/hotel/created">
                   My Hotels
                 </Link>
               </li>
@@ -51,24 +53,26 @@ const Navbar = () => {
         )}
         {user && isUserCustomer() && (
           <div>
-            <ul class="navbar-nav">
-            <li class="nav-item active">
-              <Link class="nav-link" to="/hotel">
-                Hotels
-              </Link>
-            </li>
-            <li class="nav-item active">
-              <Link class="nav-link" to="/hotel/created">
-                My Bookings
-              </Link>
-            </li>
+            <ul className="navbar-nav">
+              <li className="nav-item active">
+                <Link className="nav-link" to="/hotel">
+                  Hotels
+                </Link>
+              </li>
+              <li className="nav-item active">
+                <Link className="nav-link" to="/hotel/created">
+                  My Bookings
+                </Link>
+              </li>
             </ul>
           </div>
         )}
       </ul>
       {user && (
         <div>
-          <span>Hello, {user.firstName} {user.lastName}</span>
+          <span>
+            Hello, {user.firstName} {user.lastName}
+          </span>
           <button onClick={handleClick}>Log out</button>
         </div>
       )}
