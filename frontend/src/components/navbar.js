@@ -21,7 +21,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <Link className="navbar-brand" to="/">
         <img
           src=".\logo.png"
@@ -29,22 +29,22 @@ const Navbar = () => {
           style={{ width: "80px", marginLeft: "10px" }}
         />
       </Link>
-      <ul className="navbar-nav">
-        <li className="nav-item active">
-          <Link className="nav-link" to="/">
+      <ul class="navbar-nav">
+        <li class="nav-item active">
+          <Link class="nav-link" to="/">
             Home
           </Link>
         </li>
         {user && isUserHotelOwner() && (
           <div>
-            <ul className="navbar-nav">
-              <li className="nav-item active">
-                <Link className="nav-link" to="/hotel/add">
+            <ul class="navbar-nav">
+              <li class="nav-item active">
+                <Link class="nav-link" to="/hotel/add">
                   Add Hotel
                 </Link>
               </li>
-              <li className="nav-item active">
-                <Link className="nav-link" to="/hotel/created">
+              <li class="nav-item active">
+                <Link class="nav-link" to="/hotel/created">
                   My Hotels
                 </Link>
               </li>
@@ -53,14 +53,14 @@ const Navbar = () => {
         )}
         {user && isUserCustomer() && (
           <div>
-            <ul className="navbar-nav">
-              <li className="nav-item active">
-                <Link className="nav-link" to="/hotel">
+            <ul class="navbar-nav">
+              <li class="nav-item active">
+                <Link class="nav-link" to="/hotel">
                   Hotels
                 </Link>
               </li>
-              <li className="nav-item active">
-                <Link className="nav-link" to="/hotel/created">
+              <li class="nav-item active">
+                <Link class="nav-link" to="/bookingscreen">
                   My Bookings
                 </Link>
               </li>
