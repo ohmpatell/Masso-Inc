@@ -58,7 +58,7 @@ const Navbar = () => {
               </Link>
             </li>
             <li class="nav-item active">
-              <Link class="nav-link" to="/hotel/created">
+              <Link class="nav-link" to="/bookingscreen">
                 My Bookings
               </Link>
             </li>
