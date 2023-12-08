@@ -2,6 +2,7 @@ const express = require("express");
 const {
   getHotels,
   getHotel,
+  getCreatedHotels,
   deleteHotel,
   addHotel,
   updateHotel,
@@ -17,10 +18,12 @@ const upload = multer({ storage: storage });
 // Get all hotels
 hotelRouter.route("/").get(getHotels);
 //Get hotel by ID
-hotelRouter.route("/:id").get(getHotel);
+hotelRouter.route("/info/:id").get(getHotel);
 
 //Require auth for all the hotel edition operations routes
 hotelRouter.use(requireAuth);
+// Get created hotels (Hotel owners account)
+hotelRouter.route("/created").get(getCreatedHotels);
 //Add hotel with image
 hotelRouter.route("/add").post(upload.single("image"), addHotel);
 //Update hotel

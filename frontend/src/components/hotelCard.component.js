@@ -8,6 +8,9 @@ const HotelCard = ({ hotel }) => {
   const [reviews, setReviews] = useState([]);
   const [showInput, setShowInput] = useState(false);
 
+  const [isHovered, setIsHovered] = useState(false);
+  const cardClass = isHovered ? "card shadow-lg" : "card shadow-sm";
+
   const navigate = useNavigate();
 
   const { user } = useAuthContext();
@@ -74,7 +77,7 @@ const HotelCard = ({ hotel }) => {
     navigate(`/hotel/update/${hotel._id}`);
   };
 
-  const handleRemoveHotel=()=>{
+  const handleRemoveHotel = () => {
     if (!user) {
       alert("You must be logged in");
       return;
@@ -87,14 +90,33 @@ const HotelCard = ({ hotel }) => {
         },
       })
       .then((res) => {
-        alert("Hotel deleted successfully");        
+        alert("Hotel deleted successfully");
       })
       .catch((err) => console.log(err));
-  }
+  };
+
+  const isUserHotelOwner = () => {
+    return (
+      user && user.accountType != null && user.accountType === "HotelOwner"
+    );
+  };
+
+  const handleCardClick = () => {
+    if (!user) {
+      alert("Login for reservation");
+      return;
+    }
+    navigate(`/reservation/${hotel._id}`);
+  };
 
   return (
     <div className="container mt-5">
-      <div className="card">
+      <div
+        className={cardClass}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+        onClick={handleCardClick}
+      >
         <div className="card-body d-flex justify-content-between">
           {/* Left Side: Information */}
           <div style={{ maxWidth: "70%" }}>
@@ -141,21 +163,21 @@ const HotelCard = ({ hotel }) => {
                   </button>
                 </div>
               )}
-              {user && (
-                <button
-                  onClick={handleEditHotel}
-                  className="btn btn-warning mt-3 ml-3"
-                >
-                  Edit
-                </button>                
-              )}
-              {user && (
-                <button
-                  onClick={handleRemoveHotel}
-                  className="btn btn-danger mt-3 ml-3"
-                >
-                  Delete
-                </button>                
+              {user && isUserHotelOwner() && (
+                <div>
+                  <button
+                    onClick={handleEditHotel}
+                    className="btn btn-warning mt-3 ml-3"
+                  >
+                    Edit
+                  </button>
+                  <button
+                    onClick={handleRemoveHotel}
+                    className="btn btn-danger mt-3 ml-3"
+                  >
+                    Delete
+                  </button>
+                </div>
               )}
             </div>
           )}
