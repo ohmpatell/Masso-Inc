@@ -8,6 +8,9 @@ const HotelCard = ({ hotel }) => {
   const [reviews, setReviews] = useState([]);
   const [showInput, setShowInput] = useState(false);
 
+  const [isHovered, setIsHovered] = useState(false);
+  const cardClass = isHovered ? "card shadow-lg" : "card shadow-sm";
+
   const navigate = useNavigate();
 
   const { user } = useAuthContext();
@@ -98,9 +101,22 @@ const HotelCard = ({ hotel }) => {
     );
   };
 
+  const handleCardClick = () => {
+    if (!user) {
+      alert("Login for reservation");
+      return;
+    }
+    navigate(`/reservation/${hotel._id}`);
+  };
+
   return (
     <div className="container mt-5">
-      <div className="card">
+      <div
+        className={cardClass}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+        onClick={handleCardClick}
+      >
         <div className="card-body d-flex justify-content-between">
           {/* Left Side: Information */}
           <div style={{ maxWidth: "70%" }}>
