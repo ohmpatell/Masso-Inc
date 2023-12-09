@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "massoinc",
+  "private_key_id": "9929827e17fa53dc0988c2ab12b7a8ec3356aa2e",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDU3PkW6e+M+KVI\nG2+pgUTmpD6C0cu/7z7qIJXANGaYuJbMIXK+SVpqk2byZLbyU/4ghMDps69MZNjn\nAA6zN/Em28F6BkJByv1F5pPA3kvn3/QU+rNmlzOzqdjxz8VNP7bhka0YevkOy8ss\niVYdCKs6PXoCuYV01xQ2k6HkDFFG+a1Qd4qJ0X+59w3Sf9IhAfhKcJrQdvI53aYb\n/LxLYDGKd/SISLmKBFqp2dOxG60pp0jJN3caua4B3tIK7pGdqZCsCa/bAZE2M+Th\n4QVrhcEpnBiF052fWLblP0qpk5LZlo+5XRpVx8hxCdFEOBysg/x19QmQu4lFid6Y\nYSL81HB7AgMBAAECggEAVicdld2W/AqC8t1P414Tofnl5xK8kXFmmGIZ2hIbWEKV\nngcHpuaPdsU0DHUg6pF+MHEqlywHjjbe5xfJ21WP//c/poCz/mcG/WymbpBKTo4A\n/yC8zY/y+AuNZ8l9BJf+D+vjEB5tgUSQdfUb6mJg0xCgukuWLUUDxFcaVe96Uevs\n8TilU4DhHygLv/g0r0i4xy0e7bANIAhurQuHEEMbDt1863/ZW8pwnE+Mm7du2JNL\n4wh8Ba/H4cE+pyOFhijiZQ0hjcPeENt6rOsdPaH+l0kxaMDcY6JjGA9AkDzmbEl6\nd8km5QCED5f31bwURl2JZ4qLnu4DF9OyadaqNP+KMQKBgQDteVihxIj/MJoAjGMe\nUpFIvEhr0QFl8Cfs7X2cHd4dXsoB2VM10k2MVPEoO++HBEHZcZDVPrT8t8s1JCSl\nUKJdADam1HLgSwZ18oO/BKDLDDS7oD2eNcwW9Xx/t7C2MsyWR0k3INPtzbHX+tEk\nkLBQ4fHMzOTQY/4qwCRhNrhVOQKBgQDleB4aWQhVm3ypIdLiFFwW34cfRKY7F0lG\nWxfYrGu0PLzXi085dtcV6uXSyzGgIODIi8Epv2nyvTcO3qQzES049fDo5cSYVutE\nyzGDvPtA8D9e9nQoshcm7ys5IPNyMjjK7Ibsk6WZ1p7eLd4zbkeLrhJSG+kAYRRk\nI6lI+N5HUwKBgQDOG+D6XmsNGfDAAxjQK5efSpOMyFVvVVZBxAqeYiny0d+AZVBc\nSVA3OU4pvoNxaxeAE5pCCu/o29iKIfmQZgDVuSa1+3RNCbDs0/TW6LxqHwjxw+1X\nEJg3YQ+ShirgqAx7bhm0uFBYeIwfybiWBOKTANfuCfOajv79udCZc3XfuQKBgCT9\n8TRkJ/DNCRKm7j0d9R6G2FyVD4s1HM3nv3dhjFdY90R0I8hqvQ++d2A8+3oJ8tLB\nnNkjD2xfTnHqOGQ3H6gwFa8l40R/tpu3efr3yzVTxZOEfYNV+l9/bONfyX8eU4N7\nD+ExiB+9toywrkJyQ7xjynZMI4q5G7Vs/kxSOlsbAoGATyvK7SCITtIZo+BcGp3U\nQEiiWA5jsf7VxszI5JEmlunVXC4F1AgnHWgVd8uW1lOJeEahJs33YaSdI8SUnDw0\niLotTjDvW0Ydb+ZiWp4fZqn/+YSdBf+NLZUM6z63NV8DDKUCLZ3Le6GMdLPQp70j\nGoTRyz/EME2cbB8iRXUslxw=\n-----END PRIVATE KEY-----\n",
+  "client_email": "masso-741@massoinc.iam.gserviceaccount.com",
+  "client_id": "108284612911685051614",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/masso-741%40massoinc.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
