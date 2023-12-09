@@ -29,6 +29,9 @@ let hotelSchema = new Schema({
   image: {
     type: Buffer,    
   },
+  imageUrl: {
+    type: String,
+  },
   reviews: [
     {
       text: {

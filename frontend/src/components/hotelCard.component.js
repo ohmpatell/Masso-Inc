@@ -33,14 +33,9 @@ const HotelCard = ({ hotel }) => {
   }, [hotel._id]);
 
   const getImageSrc = () => {
-    if (hotel.image && hotel.image.data) {
-      const arrayBufferView = new Uint8Array(hotel.image.data);
-      const blob = new Blob([arrayBufferView], { type: "image/jpeg" });
-      const imageUrl = URL.createObjectURL(blob);
-      return imageUrl;
-    }
-    return null;
+    return hotel.imageUrl || ""
   };
+  
 
   const handleLeaveReview = () => {
     setShowInput(true);
@@ -134,13 +129,14 @@ const HotelCard = ({ hotel }) => {
           </div>
 
           {/* Right Side: Image and Review Input */}
-          {hotel.image && (
-            <div style={{ maxWidth: "30%" }}>
-              <img
-                src={getImageSrc()}
-                alt="Hotel"
-                style={{ maxWidth: "100%", marginBottom: "20px" }}
-              />
+          
+            {hotel.imageUrl && hotel.imageUrl.length > 0 && (
+              <div style={{ maxWidth: "30%" }}>
+                <img
+                  src={getImageSrc()}
+                  alt="Hotel"
+                  style={{ maxWidth: "100%", marginBottom: "20px" }}
+                />
               {/* <button
                 onClick={handleLeaveReview}
                 className="btn btn-primary mt-3"

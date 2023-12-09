@@ -25,11 +25,11 @@ hotelRouter.use(requireAuth);
 // Get created hotels (Hotel owners account)
 hotelRouter.route("/created").get(getCreatedHotels);
 //Add hotel with image
-hotelRouter.route("/add").post(upload.single("image"), addHotel);
+hotelRouter.route("/add").post(upload.single("imageUrl"), addHotel);
 //Update hotel
 hotelRouter
   .route("/update/:id")
-  .post(upload.single("image"), updateHotel);
+  .post(upload.single("imageUrl"), updateHotel);
 //Delete hotel
 hotelRouter.route("/delete/:id").delete(deleteHotel);
 

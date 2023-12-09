@@ -11,9 +11,8 @@ const AddHotel = () => {
     email: "",
     description: "",
     numberOfRooms: 0,
-    image: null, // New state for handling image
+    imageUrl: null, // New state for handling image
   });
-  let imagePreview = null;
   const { user } = useAuthContext();
 
   const handleChange = (e) => {
@@ -24,10 +23,18 @@ const AddHotel = () => {
     }));
   };
 
+  const [imagePreview, setImagePreview] = useState(null);
+
   const onImageChange = (e) => {
     const file = e.target.files[0];
-    formData.image = file;
-    imagePreview = URL.createObjectURL(file);
+    setFormData((prevData) => ({
+      ...prevData,
+      imageUrl: file,
+    }));
+
+    // Update image preview
+    const newImagePreview = URL.createObjectURL(file);
+    setImagePreview(newImagePreview);
   };
 
   const onSubmit = (e) => {
@@ -52,7 +59,7 @@ const AddHotel = () => {
       .catch((err) => console.log(err));
   };
 
-  const resetValues = () => {    
+  const resetValues = () => {
     setFormData({
       name: "",
       location: "",
@@ -60,8 +67,9 @@ const AddHotel = () => {
       email: "",
       description: "",
       numberOfRooms: 0,
-      image: null, // New state for handling image
+      imageUrl: null,
     });
+    setImagePreview(null);
   };
 
   return (
@@ -156,6 +164,7 @@ const AddHotel = () => {
                 onChange={onImageChange}
                 style={{ cursor: "pointer", display: "none" }}
               />
+
               <label
                 className="custom-file-label"
                 htmlFor="image"
@@ -165,14 +174,26 @@ const AddHotel = () => {
               </label>
             </div>
             {imagePreview && (
-              <div className="image-preview">
-                <img
-                  src={imagePreview}
-                  alt="Preview"
-                  style={{ maxWidth: "100px", maxHeight: "100px" }}
-                />
-              </div>
-            )}
+  <div className="image-preview">
+    {Array.isArray(imagePreview) ? (
+      imagePreview.map((preview, index) => (
+        <img
+          key={index}
+          src={preview}
+          alt={`Preview ${index + 1}`}
+          style={{ maxWidth: "100px", maxHeight: "100px" }}
+        />
+      ))
+    ) : (
+      <img
+        src={imagePreview}
+        alt="Preview"
+        style={{ maxWidth: "100px", maxHeight: "100px" }}
+      />
+    )}
+  </div>
+)}
+
           </div>
 
           <br />
