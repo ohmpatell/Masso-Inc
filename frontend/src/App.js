@@ -6,7 +6,7 @@ import {
 } from "react-router-dom";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Navbar from "./components/navbar";
+import NavBar from "./components/NavBar";
 import AddHotel from "./components/addhotel.component";
 import HotelLists from "./components/hotellists.component";
 import LandingPage from "./components/landingpage.component";
@@ -17,13 +17,16 @@ import { useAuthContext } from "../src/hooks/useAuthContext";
 import CreatedHotelList from "./components/createdHotelList.component";
 import BookingScreen from "./components/Bookingscreen";
 import Reservation from "./components/reservation.component";
+import Footer from "./components/footer";
+import 'bootstrap-icons/font/bootstrap-icons.css';
+
 
 function App() {
   const { user } = useAuthContext();
 
   return (
     <Router>
-      <Navbar />
+      <NavBar/>
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route
@@ -56,6 +59,8 @@ function App() {
           element={user ? <Reservation /> : <Navigate to="/login" />}
         />
       </Routes>
+    <Footer />
+
     </Router>
   );
 }
