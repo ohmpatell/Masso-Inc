@@ -89,7 +89,7 @@ const Footer = () => {
             All Rights Reserved &copy; 2023 Masso Inc., Toronto, ON, Canada.{" "}
             <span>
               <a
-                href="http://127.0.0.1:5500/Privacy%20Policy/masso-privacy.html"
+                href="https://massoinc-policies.netlify.app/"
                 target="_blank"
                 rel="noreferrer"
               >
