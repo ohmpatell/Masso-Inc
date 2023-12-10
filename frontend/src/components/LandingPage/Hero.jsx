@@ -1,8 +1,6 @@
-// HeroSection.js
 import React from "react";
 import "./Hero.css";
-import "../NavBar";
-//import NavBar from "../NavBar";
+import "../NavBar"; 
 
 const Hero = () => {
   return (
@@ -14,26 +12,26 @@ const Hero = () => {
             <p className="lead">Elevate Your Stay, Experience More</p>
           </div>
           <div className="hero-box">
-            <form className="form-inline">
-              <div className="input-group">
-                <input
-                  type="text"
-                  className="form-control"
-                  placeholder="Search for hotels..."
-                  aria-label="Search"
-                  aria-describedby="button-addon2"
-                />
-                <div className="input-group-append">
-                  <button
-                    className="btn btn-warning"
-                    type="button"
-                    id="button-addon2"
-                  >
-                    Search
-                  </button>
-                </div>
-              </div>
-            </form>
+          <form className="form-inline">
+  <div className="input-group">
+    <input
+      type="text"
+      className="form-control"
+      placeholder="Search for hotels..."
+      aria-label="Search"
+      aria-describedby="button-addon2"
+    />
+    <button
+    style={{borderTopLeftRadius: "0px", borderBottomLeftRadius: "0px"}}
+      className="btn btn-warning"
+      type="button"
+      id="button-addon2"
+    >
+      Search
+    </button>
+  </div>
+</form>
+
           </div>
         </div>
 
@@ -42,7 +40,7 @@ const Hero = () => {
             <div className="col-2">
               <h2 className="mb-0">Partners With</h2>
             </div>
-            <div className="col-10">
+            <div className="col-10 text-center">
               <img
                 src="https://1000logos.net/wp-content/uploads/2017/02/Hilton-logo-640x504.png"
                 alt="Hilton"

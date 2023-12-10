@@ -3,6 +3,7 @@ import React from "react";
 //import Login from "./login.component";
 import Hero from "./LandingPage/Hero";
 import BestOffers from "./LandingPage/BestOffers";
+import FAQ from "./LandingPage/faq";
 
 const LandingPage = () => {
   //const [showFindHotel, setShowFindHotel] = useState(true);
@@ -13,8 +14,18 @@ const LandingPage = () => {
 
   return (
     <div>
-      <Hero/>
-      <BestOffers/>
+      <div id="hero" style={{maxHeight:"100vh"}}>
+        <Hero/>
+      </div>
+      
+      <div id="best-offers" style={{maxHeight:"100vh"}}>
+        <BestOffers/>
+      </div>
+
+      <div id="faq" style={{height:"100vh"}}>
+        <FAQ/>
+      </div>
+
     </div>
   );
 };

@@ -17,6 +17,9 @@ import { useAuthContext } from "../src/hooks/useAuthContext";
 import CreatedHotelList from "./components/createdHotelList.component";
 import BookingScreen from "./components/Bookingscreen";
 import Reservation from "./components/reservation.component";
+import Footer from "./components/footer";
+import 'bootstrap-icons/font/bootstrap-icons.css';
+
 
 function App() {
   const { user } = useAuthContext();
@@ -56,6 +59,8 @@ function App() {
           element={user ? <Reservation /> : <Navigate to="/login" />}
         />
       </Routes>
+    <Footer />
+
     </Router>
   );
 }

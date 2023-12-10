@@ -6,6 +6,8 @@
     flex-direction: column;
 }
 
+
+
 .hero-container {
     background: 
         linear-gradient(to right, rgba(0, 0, 0, 0.70), rgba(0, 0, 0, 0.2)),
@@ -33,3 +35,76 @@
     max-width: 100px; 
     margin-right: 20px; 
 }
+
+
+.bg-blur {
+    background-color: rgba(255, 255, 255, 0.7); /* Semi-transparent white */
+    backdrop-filter: blur(5px); /* Apply blur effect */
+    border-radius: 10px; /* Optional: Add rounded corners */
+    padding: 20px; /* Optional: Add padding for better visibility */
+  }
+
+
+#best-offers{
+    background-image: url("../../assets/images/best-offers-bg.svg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+  
+#hero{
+    background-image: url("../../assets/images/hero-bg.svg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}   
+
+#faq{
+    background-image: url("../../assets/images/faq-bg.svg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding-top: 2.5rem;
+}
+
+/* Add this to your CSS file or style section */
+.faq-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+  
+  .faq-item {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: height 0.5s;
+  }
+  
+  .faq-question {
+    padding: 15px;
+    cursor: pointer;
+    background-color: #f0f0f0;
+  }
+  
+  .faq-answer {
+    overflow: hidden;
+  }
+  
+  .answer-popup {
+    padding: 20px;
+    margin-top: 20px;
+    background-color: #f8f8f8;
+    border-left: 4px solid #3498db;
+    border-radius: 8px;
+    animation: fadeIn 0.5s ease-in-out;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }

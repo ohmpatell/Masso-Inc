@@ -46,56 +46,66 @@ const Login = () => {
     <div className="container mt-5">
       <div className="row justify-content-center">
         <div className="col-md-6">
-          
+          <div className="card">
+            <div className="card-body">
+              {/* Login Form */}
+              <form onSubmit={handleSubmit}>
+                {/* Title */}
+                <h2 className="text-center mb-4">Login</h2>
 
-            {/* Login Form */}
-            <form onSubmit={handleSubmit}>
-              {/* Email Input */}
-              <div className="form-group mb-4">
-                <label htmlFor="email">Email</label>
-                <input
-                  type="email"
-                  className={`form-control ${formErrors.email ? "is-invalid" : ""}`}
-                  id="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                />
-                {formErrors.email && (
-                  <div className="invalid-feedback">{formErrors.email}</div>
-                )}
-              </div>
+                {/* Email Input */}
+                <div className="form-group mb-4">
+                  <label htmlFor="email">Email</label>
+                  <input
+                    type="email"
+                    className={`form-control ${formErrors.email ? "is-invalid" : ""}`}
+                    id="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                  />
+                  {formErrors.email && (
+                    <div className="invalid-feedback">{formErrors.email}</div>
+                  )}
+                </div>
 
-              {/* Password Input */}
-              <div className="form-group mb-4">
-                <label htmlFor="password">Password</label>
-                <input
-                  type="password"
-                  className={`form-control ${
-                    formErrors.password ? "is-invalid" : ""
-                  }`}
-                  id="password"
-                  name="password"
-                  value={formData.password}
-                  onChange={handleChange}
-                />
-                {formErrors.password && (
-                  <div className="invalid-feedback">{formErrors.password}</div>
-                )}
-              </div>
+                {/* Password Input */}
+                <div className="form-group mb-4">
+                  <label htmlFor="password">Password</label>
+                  <input
+                    type="password"
+                    className={`form-control ${
+                      formErrors.password ? "is-invalid" : ""
+                    }`}
+                    id="password"
+                    name="password"
+                    value={formData.password}
+                    onChange={handleChange}
+                  />
+                  {formErrors.password && (
+                    <div className="invalid-feedback">{formErrors.password}</div>
+                  )}
+                </div>
 
-              {/* Login Button */}
-              <button
-                disabled={isLoading}
-                type="submit"
-                className="btn btn-primary"
-              >
-                Login
-              </button>
-            </form>
+                {/* Login Button */}
+                <button
+                  disabled={isLoading}
+                  type="submit"
+                  className="btn btn-primary"
+                >
+                  Login
+                </button>
+
+                {/* Register Link */}
+                <p className="mt-3 text-center">
+                  Not a user? <Link to="/signup">Register</Link>
+                </p>
+              </form>
+            </div>
           </div>
         </div>
       </div>
+    </div>
   );
 };
 
