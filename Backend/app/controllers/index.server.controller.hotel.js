@@ -23,7 +23,7 @@ const getCreatedHotels = (req, res, next) => {
 
 //Add hotel with image
 const addHotel = async (req, res, next) => {
-  const { name, location, phone, email, description, numberOfRooms } = req.body;
+  const { name, location, phone, email, description, price } = req.body;
   const creatorUserId = req.user._id;
 
   try {
@@ -35,7 +35,7 @@ const addHotel = async (req, res, next) => {
       phone,
       email,
       description,
-      numberOfRooms,
+      price,
       imageUrl: imageUrl,
       creatorUserId,
     });
@@ -50,7 +50,7 @@ const addHotel = async (req, res, next) => {
 
 //Update hotel
 const updateHotel = async (req, res, next) => {
-  const { name, location, phone, email, description, numberOfRooms } = req.body;
+  const { name, location, phone, email, description, price } = req.body;
 
   try {
       const hotel = await Hotel.findById(req.params.id);
@@ -65,7 +65,7 @@ const updateHotel = async (req, res, next) => {
       hotel.phone = phone;
       hotel.email = email;
       hotel.description = description;
-      hotel.numberOfRooms = numberOfRooms;
+      hotel.price = price;
 
       if (req.files) {
           const imageUrl = await uploadImagesToStorage(req.file);

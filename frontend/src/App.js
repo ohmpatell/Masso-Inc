@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import {
   Route,
   BrowserRouter as Router,
@@ -18,22 +19,30 @@ import CreatedHotelList from "./components/createdHotelList.component";
 import BookingScreen from "./components/Bookingscreen";
 import Reservation from "./components/reservation.component";
 import Footer from "./components/footer";
+import LoadingSpinner from "./components/LoadingSpinner"; // Import the LoadingSpinner component
 import 'bootstrap-icons/font/bootstrap-icons.css';
-
 
 function App() {
   const { user } = useAuthContext();
+  const [isLoading, setIsLoading] = useState(false); // Add loading state
+
+  const setLoading = (status) => {
+    setIsLoading(status);
+  };
 
   return (
     <Router>
-      <NavBar/>
+      <NavBar />
+      {/* Conditional rendering of loading spinner */}
+      {isLoading && <LoadingSpinner />}
+
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route
           path="/hotel/add"
           element={user ? <AddHotel /> : <Navigate to="/login" />}
         />
-        <Route path="/hotel" element={<HotelLists />} />
+        <Route path="/hotel" element={<HotelLists setLoading={setLoading} />} />
         <Route
           path="/hotel/created"
           element={user ? <CreatedHotelList /> : <Navigate to="/login" />}
@@ -56,11 +65,10 @@ function App() {
         />
         <Route
           path="/reservation/:hotelId"
-          element={user ? <Reservation /> : <Navigate to="/login" />}
+          element={user ? <Reservation setLoading={setLoading} /> : <Navigate to="/login" />}
         />
       </Routes>
-    <Footer />
-
+      <Footer />
     </Router>
   );
 }

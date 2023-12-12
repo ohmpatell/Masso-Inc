@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useSignup } from "../hooks/useSignup";
 import { Link } from "react-router-dom";
+import ParticleBackground from "../assets/ParticlesBackground";
 
 const Registration = () => {
   const [formData, setFormData] = useState({
@@ -82,7 +83,9 @@ const Registration = () => {
   };
 
   return (
-    <div className="container mt-5">
+    <>
+    <ParticleBackground />
+    <div className="container mt-5 vh-100">
       <div className="row justify-content-center">
         <div className="col-md-6">
           <div className="card">
@@ -219,6 +222,7 @@ const Registration = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 
