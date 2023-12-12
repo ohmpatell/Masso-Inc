@@ -10,10 +10,11 @@ const AddHotel = () => {
     phone: "",
     email: "",
     description: "",
-    numberOfRooms: 0,
-    imageUrl: null, // New state for handling image
+    price: 0,
+    imageUrl: null,
   });
   const { user } = useAuthContext();
+  const [imagePreview, setImagePreview] = useState(null);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -22,8 +23,6 @@ const AddHotel = () => {
       [name]: value,
     }));
   };
-
-  const [imagePreview, setImagePreview] = useState(null);
 
   const onImageChange = (e) => {
     const file = e.target.files[0];
@@ -66,17 +65,21 @@ const AddHotel = () => {
       phone: "",
       email: "",
       description: "",
-      numberOfRooms: 0,
+      price: 0,
       imageUrl: null,
     });
     setImagePreview(null);
   };
 
   return (
-    <div className="container" style={{ justifyItems: "center" }}>
-      <div className="col-lg-6">
-        <form onSubmit={onSubmit}>
-          <div className="form-group input">
+    <div className="container mt-5 vh-100">
+      <h2 className="text-center mb-4">Add your hotel to Masso</h2>
+      <div className="row">
+        {/* Hotel Form */}
+        <div className="col-lg-6">
+          <form onSubmit={onSubmit}>
+            {/* ... (previous form fields) ... */}
+            <div className="form-group input">
             <input
               type="text"
               placeholder="Name"
@@ -144,59 +147,39 @@ const AddHotel = () => {
           <div className="form-group input">
             <input
               type="text"
-              placeholder="NumberOfRooms"
+              placeholder="price"
               className="customInput"
-              name="numberOfRooms"
-              value={formData.numberOfRooms}
+              name="price"
+              value={formData.price}
               onChange={handleChange}
             />
           </div>
 
           <br />
 
-          <div className="form-group input">
-            <div className="custom-file">
-              <input
-                type="file"
-                className="custom-file-input"
-                name="image"
-                id="image"
-                onChange={onImageChange}
-                style={{ cursor: "pointer", display: "none" }}
-              />
-
-              <label
-                className="custom-file-label"
-                htmlFor="image"
-                style={{ cursor: "pointer" }}
-              >
-                Choose Image
-              </label>
+            <div className="form-group input">
+              <div className="custom-file">
+                <input
+                  type="file"
+                  className="custom-file-input"
+                  name="image"
+                  id="image"
+                  onChange={onImageChange}
+                  style={{ cursor: "pointer", display: "none" }}
+                />
+                <label
+                  className="custom-file-label"
+                  htmlFor="image"
+                  style={{ cursor: "pointer" }}
+                >
+                  Choose Image
+                </label>
+              </div>
+              
             </div>
-            {imagePreview && (
-  <div className="image-preview">
-    {Array.isArray(imagePreview) ? (
-      imagePreview.map((preview, index) => (
-        <img
-          key={index}
-          src={preview}
-          alt={`Preview ${index + 1}`}
-          style={{ maxWidth: "100px", maxHeight: "100px" }}
-        />
-      ))
-    ) : (
-      <img
-        src={imagePreview}
-        alt="Preview"
-        style={{ maxWidth: "100px", maxHeight: "100px" }}
-      />
-    )}
-  </div>
-)}
 
-          </div>
-
-          <br />
+            {/* ... (previous form buttons) ... */}
+            <br />
 
           <div className="formButtonsContainer">
             <button
@@ -214,13 +197,38 @@ const AddHotel = () => {
               Cancel
             </button>
           </div>
-        </form>
+          </form>
+        </div>
+
+        {/* Hotel Card */}
+        <div className="col-lg-6">
+  <div className="card">
+    <img
+      src={imagePreview || "https://placekitten.com/300/200"}
+      className="card-img-top"
+      alt="Hotel"
+      style={{ maxWidth: "100%", maxHeight: "200px", objectFit: "cover" }}
+    />
+    <div className="card-body">
+      <h5 className="card-title">{formData.name || "Hotel Name"}</h5>
+      <p className="card-text">
+        {formData.description || "Hotel Description"}
+      </p>
+      <p className="card-text">Location: {formData.location || "Unknown"}</p>
+      <p className="card-text">Price: ${formData.price || "0"}</p>
+    </div>
+  </div>
+</div>
+
+
+
       </div>
     </div>
   );
 };
 
 export default AddHotel;
+
 // import React, { Component } from "react";
 // import axios from "axios";
 // import "../App.css";
@@ -238,7 +246,7 @@ export default AddHotel;
 //       phone: "",
 //       email: "",
 //       description: "",
-//       numberOfRooms: 0,
+//       price: 0,
 //       image: null, // New state for handling image
 //     };
 //   }
@@ -267,7 +275,7 @@ export default AddHotel;
 //     formData.append("phone", this.state.phone);
 //     formData.append("email", this.state.email);
 //     formData.append("description", this.state.description);
-//     formData.append("numberOfRooms", this.state.numberOfRooms);
+//     formData.append("price", this.state.price);
 //     formData.append("image", this.state.image); // Append the image file
 
 //     axios
@@ -290,7 +298,7 @@ export default AddHotel;
 //       phone: "",
 //       email: "",
 //       description: "",
-//       numberOfRooms: 0,
+//       price: 0,
 //       image: null,
 //       imagePreview: null,
 //     });
@@ -369,10 +377,10 @@ export default AddHotel;
 //             <div className="form-group input">
 //               <input
 //                 type="text"
-//                 placeholder="NumberOfRooms"
+//                 placeholder="price"
 //                 className="customInput"
-//                 name="numberOfRooms"
-//                 value={this.state.numberOfRooms}
+//                 name="price"
+//                 value={this.state.price}
 //                 onChange={this.onChange}
 //               />
 //             </div>

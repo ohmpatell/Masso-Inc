@@ -3,8 +3,17 @@ import { Link } from "react-router-dom";
 import "./LandingPage/Hero.css";
 import { useLogout } from "../hooks/useLogout";
 import { useAuthContext } from "../hooks/useAuthContext";
+import { scroller } from "react-scroll";
 
 const NavBar = () => {
+  const scrollToSection = (section) => {
+    scroller.scrollTo(section, {
+      duration: 500,
+      delay: 0,
+      smooth: "easeInOutQuart",
+    });
+  };
+
   const { logout } = useLogout();
   const { user } = useAuthContext();
 
@@ -46,19 +55,15 @@ const NavBar = () => {
                 Home
               </Link>
             </li>
+            
             <li className="nav-item">
-              <a className="nav-link" href="@" activeClassName="active">
-                About
-              </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="2" activeClassName="active">
+              <a className="nav-link" onClick={() => scrollToSection("best-offers")} activeClassName="active" style={{cursor:"pointer"}}>
                 Best Offers
               </a>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="@" activeClassName="active">
-                Contact
+              <a className="nav-link"onClick={() => scrollToSection("faq")}  activeClassName="active" style={{cursor:"pointer"}}>
+                FAQ
               </a>
             </li>
             {user && (
@@ -74,12 +79,14 @@ const NavBar = () => {
               </Link>
             </li>
             {user ? (
+              <>
               <div className="nav-item">
-                <span className="nav-link">{user.email}</span>
-                <button onClick={handleClick} className="btn btn-warning">
+                <span className="nav-link text-dark">Hi, {user.firstName}</span>
+                </div>
+                <button onClick={handleClick} className="btn btn-warning nav-item">
                   Log out
                 </button>
-              </div>
+              </>
             ) : (
               <button className="nav-item">
                 <Link to="/login" className="nav-link" activeClassName="active">

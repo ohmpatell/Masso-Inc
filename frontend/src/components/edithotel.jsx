@@ -13,7 +13,7 @@ const EditHotel = () => {
     phone: "",
     email: "",
     description: "",
-    numberOfRooms: 0,
+    price: 0,
     image: null,
     imagePreview: null,
     hotelId: id,
@@ -32,7 +32,7 @@ const EditHotel = () => {
           phone: hotelData.phone,
           email: hotelData.email,
           description: hotelData.description,
-          numberOfRooms: hotelData.numberOfRooms,
+          price: hotelData.price,
           imagePreview: hotelData.image
             ? URL.createObjectURL(new Blob([hotelData.image.data]))
             : null,
@@ -73,7 +73,7 @@ const EditHotel = () => {
     formData.append("phone", hotel.phone);
     formData.append("email", hotel.email);
     formData.append("description", hotel.description);
-    formData.append("numberOfRooms", hotel.numberOfRooms);
+    formData.append("price", hotel.price);
     formData.append("image", hotel.image);
 
     axios
@@ -99,7 +99,7 @@ const EditHotel = () => {
       phone: "",
       email: "",
       description: "",
-      numberOfRooms: 0,
+      price: 0,
       image: null,
       imagePreview: null,
       hotelId: id,
@@ -171,12 +171,12 @@ const EditHotel = () => {
           </div>
 
           <div className="form-group input">
-            <label>Number of Rooms:</label>
+            <label>Price per stay:</label>
             <input
               type="text"
               className="form-control"
-              name="numberOfRooms"
-              value={hotel.numberOfRooms}
+              name="price"
+              value={hotel.price}
               onChange={onChange}
             />
           </div>
