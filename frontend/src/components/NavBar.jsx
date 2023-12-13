@@ -21,6 +21,14 @@ const NavBar = () => {
     logout();
   };
 
+  const isUserCustomer = () => {
+    return user && user.accountType != null && user.accountType === "Customer";
+  };
+
+  const isUserHotelOwner = () => {
+    return user && user.accountType != null && user.accountType === "HotelOwner";
+  };
+
   return (
     <div className="navbar-container" style={{ height: "10vh" }}>
       <nav
@@ -66,18 +74,32 @@ const NavBar = () => {
                 FAQ
               </a>
             </li>
-            {user && (
+            {user && isUserHotelOwner() && (
+              <div>
               <li className="nav-item">
                 <Link className="nav-link" to="/hotel/add" activeClassName="active">
                   Add Hotel
                 </Link>
               </li>
+              <li className="nav-item">
+                <Link className="nav-link" to="/hotel/created" activeClassName="active">
+                  My Hotels
+                </Link>
+              </li>
+              </div>
             )}
             <li className="nav-item">
               <Link className="nav-link" to="/hotel" activeClassName="active">
                 Hotel List
               </Link>
             </li>
+            {user && isUserCustomer() && (              
+              <li className="nav-item">
+                <Link className="nav-link" to="/myBookings" activeClassName="active">
+                  My Bookings
+                </Link>
+              </li>                            
+            )}
             {user ? (
               <>
               <div className="nav-item">

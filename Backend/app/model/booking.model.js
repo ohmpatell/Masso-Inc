@@ -21,6 +21,10 @@ let bookingSchema = new Schema({
   numberOfGuests: {
     type: Number,
     required: true,
+  }, 
+  fullPrice: {
+    type: Number,
+    required: true,
   },  
 });
 

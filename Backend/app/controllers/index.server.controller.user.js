@@ -43,4 +43,11 @@ const signupUser = async (req, res) => {
   }
 };
 
-module.exports = { loginUser, signupUser };
+//Get hotel by ID
+const getUserInfo = (req, res, next) => {
+  User.findById(req.params.id)
+    .then((user) => res.status(200).json(user))
+    .catch((err) => res.status(400).json({ error: err }));
+};
+
+module.exports = { loginUser, signupUser, getUserInfo };

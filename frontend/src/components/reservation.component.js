@@ -12,7 +12,7 @@ import {
   faTv,
 } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
-
+import HotelBooking from "./hotelBooking.component";
 
 const Reservation = () => {
   const { hotelId } = useParams();
@@ -24,7 +24,9 @@ const Reservation = () => {
   const [numOfPeople, setNumOfPeople] = useState(1);
   const [reviewText, setReviewText] = useState("");
   const [reviews, setReviews] = useState([]);
+  const [bookings, setBookings] = useState([]);
   const [showInput, setShowInput] = useState(false);
+  const [fullPrice, setFullPrice]=useState("0")
 
   const navigate = useNavigate();
 
@@ -68,12 +70,30 @@ const Reservation = () => {
     fetchReviews();
   }, [hotelId]);
 
+  useEffect(() => {
+    const fetchBookings = async () => {
+      axios
+        .get(`http://localhost:8081/api/booking//getHotelBookings/${hotelId}`, {
+          headers: {
+            Authorization: `Bearer ${user.token}`,
+          },
+        })
+        .then((res) => setBookings(res.data))
+        .catch((err) => console.log(err));
+    };
+
+    if (user) {
+      fetchBookings();
+    }
+  }, [hotelId]);
+
   const handleReservation = () => {
     const reservationDetails = {
-      startDate: startDate.toISOString(),
-      endDate: endDate.toISOString(),
-      numOfPeople: numOfPeople,
       hotelId: hotelId,
+      checkInDate: startDate.toISOString(),
+      checkOutDate: endDate.toISOString(),
+      numberOfGuests: numOfPeople,
+      fullPrice:fullPrice
     };
 
     const config = user?.token
@@ -85,9 +105,14 @@ const Reservation = () => {
       : {};
 
     axios
-      .post("http://localhost:8081/api/reservations", reservationDetails, config)
+      .post(
+        "http://localhost:8081/api/booking/create",
+        reservationDetails,
+        config
+      )
       .then((response) => {
         console.log("Reservation successful:", response.data);
+        navigate('/hotel')
       })
       .catch((error) => {
         console.error("Reservation failed:", error);
@@ -127,6 +152,19 @@ const Reservation = () => {
     );
   };
 
+  const renderBookings = () => {
+    return bookings.map((currentBooking, i) => (
+      <HotelBooking booking={currentBooking} key={i} />
+    ));
+  };
+
+  const calculateFullPrice = () => {
+    if (startDate && endDate && hotel) {
+      let days = Math.round((endDate - startDate) / (1000 * 60 * 60 * 24));
+      setFullPrice(days*hotel.price);
+    }
+  };
+
   return (
     <>
       <div className="container-fluid pt-5 mb-4">
@@ -150,67 +188,81 @@ const Reservation = () => {
               <p>Price per stay: ${hotel?.price}</p>
               <h3>Amenities:</h3>
               <ul>
-              <li className="mb-2">
-                <FontAwesomeIcon icon={faWifi} className="mr-2" />
-                Free Wi-Fi
-              </li>
-              <li>
-                <FontAwesomeIcon icon={faParking} className="mr-2" />
-                Free Parking
-              </li>
-              <li>
-                <FontAwesomeIcon icon={faSwimmingPool} className="mr-2" />
-                Swimming Pool
-              </li>
-              <li>
-                <FontAwesomeIcon icon={faTv} className="mr-2" />
-                TV in rooms
-              </li>
-            </ul>
+                <li className="mb-2">
+                  <FontAwesomeIcon icon={faWifi} className="mr-2" />
+                  Free Wi-Fi
+                </li>
+                <li>
+                  <FontAwesomeIcon icon={faParking} className="mr-2" />
+                  Free Parking
+                </li>
+                <li>
+                  <FontAwesomeIcon icon={faSwimmingPool} className="mr-2" />
+                  Swimming Pool
+                </li>
+                <li>
+                  <FontAwesomeIcon icon={faTv} className="mr-2" />
+                  TV in rooms
+                </li>
+              </ul>
             </div>
           </div>
         </div>
       </div>
+      {user && !isUserHotelOwner() && (
+        <div className="container mb-4">
+          <h1 className="text-center">Reserve Now!</h1>
+          <div className="row justify-content-center">
+            <div className="col-md-6">
+              {/* Reservation Form Section */}
+              <p>Select Your Stay Dates</p>
+              <DatePicker
+                selected={startDate}
+                onChange={(date) => setStartDate(date)}
+                selectsStart
+                startDate={startDate}
+                endDate={endDate}
+                minDate={new Date()}
+                className="form-control"
+              />
+              <DatePicker
+                selected={endDate}
+                onChange={(date) => setEndDate(date)}
+                selectsEnd
+                startDate={startDate}
+                endDate={endDate}
+                minDate={startDate}
+                className="form-control"
+              />
+              <p>For how many guests?</p>
+              <input
+                type="number"
+                value={numOfPeople}
+                onChange={(e) => setNumOfPeople(e.target.value)}
+                min="1"
+                className="form-control"
+              />
+              <p>Full price:</p>
+              <p>${fullPrice}</p>
 
-      <div className="container mb-4">
-        <h1 className="text-center">Reserve Now!</h1>
-        <div className="row justify-content-center">
-          <div className="col-md-6">
-            {/* Reservation Form Section */}
-            <p>Select Your Stay Dates</p>
-            <DatePicker
-              selected={startDate}
-              onChange={(date) => setStartDate(date)}
-              selectsStart
-              startDate={startDate}
-              endDate={endDate}
-              minDate={new Date()}
-              className="form-control"
-            />
-            <DatePicker
-              selected={endDate}
-              onChange={(date) => setEndDate(date)}
-              selectsEnd
-              startDate={startDate}
-              endDate={endDate}
-              minDate={startDate}
-              className="form-control"
-            />
-            <p>For how many guests?</p>
-            <input
-              type="number"
-              value={numOfPeople}
-              onChange={(e) => setNumOfPeople(e.target.value)}
-              min="1"
-              className="form-control"
-            />
-            <button onClick={handleReservation} className="btn btn-primary mt-3">
-              Book Now
-            </button>
+              <button
+                onClick={calculateFullPrice}
+                className="btn btn-primary mt-3"
+              >
+                Calculate
+              </button>
+              {fullPrice!="0" && (
+              <button
+                onClick={handleReservation}
+                className="btn btn-primary mt-3"
+              >
+                Book Now
+              </button>
+              )}
+            </div>
           </div>
         </div>
-      </div>
-
+      )}
       {user && (
         // Reviews Section
         <div className="container mb-4">
@@ -226,24 +278,26 @@ const Reservation = () => {
           )}
 
           {isUserHotelOwner() && (
-            // Edit Hotel Section for Hotel Owners
-            <div className="text-center">
-              <button
-                onClick={() => navigate(`/hotel/update/${hotel?._id}`)}
-                className="btn btn-warning mt-3 ml-3"
-              >
-                Edit Hotel
-              </button>
+            <div>
+              <div className="text-center">
+                <button
+                  onClick={() => navigate(`/hotel/update/${hotel?._id}`)}
+                  className="btn btn-warning mt-3 ml-3"
+                >
+                  Edit Hotel
+                </button>
+                <h2 className="text-center">Bookings</h2>
+              </div>
+              <div className="hotel-list d-flex flex-wrap container">
+                {renderBookings()}
+              </div>
             </div>
           )}
 
           {user && !isUserHotelOwner() && (
             // Leave Review Section for Guests
             <div className="text-center mt-3">
-              <button
-                onClick={handleLeaveReview}
-                className="btn btn-primary"
-              >
+              <button onClick={handleLeaveReview} className="btn btn-primary">
                 Leave a Review
               </button>
               {showInput && (

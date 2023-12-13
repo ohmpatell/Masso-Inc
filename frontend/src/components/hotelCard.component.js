@@ -44,7 +44,7 @@ const HotelCard = ({ hotel }) => {
         <div className="card-body">
           <h5 className="card-title">{hotel.name}</h5>
           <p className="card-text">Location: {hotel.location}</p>
-          <p className="card-text">Price per stay: ${hotel.price}</p>
+          <p className="card-text">Price per night: ${hotel.price}</p>
         </div>
         
       </div>
