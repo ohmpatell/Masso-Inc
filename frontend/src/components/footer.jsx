@@ -75,7 +75,11 @@ const Footer = () => {
             <p>Phone: +1 (123) 456-7890</p>
             {/* Add the company address here */}
             <p>
+<<<<<<< HEAD
               Masso Inc., 155 Wellington St W 37th Floor, Ste 3720<br />
+=======
+              155 Wellington St W 37th Floor, Ste 3720<br />
+>>>>>>> fa73bab2f612988a5a55d7b34a63221c09522a97
               Toronto, Ontario M5V 3L3, Canada
             </p>
           </div>
