@@ -3,6 +3,9 @@ import React, { Component } from "react";
 import HotelCard from "./hotelCard.component";
 
 export default class HotelLists extends Component {
+
+  
+
   constructor(props) {
     super(props);
     this.state = { hotels: [], searchTerm: "" };
@@ -20,7 +23,7 @@ export default class HotelLists extends Component {
   }
 
   fetchHotels() {
-    const url = `http://localhost:8081/api/hotel?search=${this.state.searchTerm}`;
+    const url = `https://masso-inc.onrender.com//api/hotel?search=${this.state.searchTerm}`;
     axios
       .get(url)
       .then((res) => this.setState({ hotels: res.data }))
