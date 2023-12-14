@@ -3,9 +3,6 @@ import React, { Component } from "react";
 import HotelCard from "./hotelCard.component";
 
 export default class HotelLists extends Component {
-
-  
-
   constructor(props) {
     super(props);
     this.state = { hotels: [], searchTerm: "" };
@@ -23,7 +20,7 @@ export default class HotelLists extends Component {
   }
 
   fetchHotels() {
-    const url = `https://masso-inc.onrender.com/api/hotel?search=${this.state.searchTerm}`;
+    const url = `https://masso-inc.onrender.com/api/hotel`;
     axios
       .get(url)
       .then((res) => this.setState({ hotels: res.data }))
@@ -36,7 +33,10 @@ export default class HotelLists extends Component {
 
   renderHotelCards() {
     return this.state.hotels.map((currentHotel, i) => (
-      <HotelCard hotel={currentHotel} key={i} />
+      (currentHotel.name.toLowerCase().includes(this.state.searchTerm.toLowerCase())
+      || currentHotel.location.toLowerCase().includes(this.state.searchTerm.toLowerCase())) ? (
+        <HotelCard hotel={currentHotel} key={i} />
+      ) : null
     ));
   }
 

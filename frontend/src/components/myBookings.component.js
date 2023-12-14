@@ -7,7 +7,7 @@ import { useAuthContext } from "../hooks/useAuthContext";
 
 
 const MyBookings = () => {
-  const [bookings, setBookings] = useState([]);
+  const [bookings, setBookings] = useState([]);  
   const { user } = useAuthContext();
 
   useEffect(() => {
@@ -34,18 +34,7 @@ const MyBookings = () => {
   };
 
   return (
-          <div className="container mt-4">
-            {/* Search Bar */}
-            <div className="mb-4">
-              <input
-                type="text"
-                className="form-control"
-                placeholder="Search by name or location"
-                // value={this.state.searchTerm}
-                // onChange={this.handleSearchChange}
-              />
-            </div>
-    
+          <div className="container mt-4">              
             {/* Customer Bookings */}
             <div className="hotel-list d-flex flex-wrap container">
               {renderBookings()}
