@@ -110,7 +110,7 @@ const NavBar = () => {
               </>
             ) : (
               <button className="nav-item">
-                <Link to="/login" className="nav-link" activeClassName="active">
+                <Link to="/login" className="btn btn-warning nav-item" activeClassName="active">
                   SignIn
                 </Link>
               </button>
