@@ -171,7 +171,7 @@ const EditHotel = () => {
           </div>
 
           <div className="form-group input">
-            <label>Price per stay:</label>
+            <label>Price per night:</label>
             <input
               type="text"
               className="form-control"

@@ -21,6 +21,7 @@ import Reservation from "./components/reservation.component";
 import Footer from "./components/footer";
 import LoadingSpinner from "./components/LoadingSpinner"; // Import the LoadingSpinner component
 import 'bootstrap-icons/font/bootstrap-icons.css';
+import MyBookings from "./components/myBookings.component";
 
 function App() {
   const { user } = useAuthContext();
@@ -48,10 +49,6 @@ function App() {
           element={user ? <CreatedHotelList /> : <Navigate to="/login" />}
         />
         <Route
-          path="/bookingscreen"
-          element={user ? <BookingScreen /> : <Navigate to="/login" />}
-        />
-        <Route
           path="/hotel/update/:id"
           element={user ? <EditHotel /> : <Navigate to="/login" />}
         />
@@ -66,6 +63,10 @@ function App() {
         <Route
           path="/reservation/:hotelId"
           element={user ? <Reservation setLoading={setLoading} /> : <Navigate to="/login" />}
+        />
+        <Route
+          path="/myBookings"
+          element={user ? <MyBookings setLoading={setLoading} /> : <Navigate to="/login" />}
         />
       </Routes>
       <Footer />

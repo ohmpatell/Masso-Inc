@@ -23,8 +23,9 @@ const getBooking = (req, res, next) => {
 
 //Create booking
 const createBooking = (req, res, next) => {
-  const { hotelId, checkInDate, checkOutDate, numberOfGuests } = req.body;
-  const customerId = req.user._id;
+  const { hotelId, checkInDate, checkOutDate, numberOfGuests, fullPrice } = req.body;
+  const customerId = req.user._id;  
+  console.log(fullPrice)
 
   let booking = new Booking({
     customerId,
@@ -32,6 +33,7 @@ const createBooking = (req, res, next) => {
     checkInDate,
     checkOutDate,
     numberOfGuests,
+    fullPrice,
   });
 
   booking
@@ -42,7 +44,7 @@ const createBooking = (req, res, next) => {
 
 //Update booking
 const updateBooking = (req, res, next) => {
-  const { checkInDate, checkOutDate, numberOfGuests } = req.body;
+  const { checkInDate, checkOutDate, numberOfGuests, fullPrice } = req.body;
 
   Booking.findById(req.params.id)
     .then((booking) => {
@@ -50,6 +52,7 @@ const updateBooking = (req, res, next) => {
       booking.checkInDate = checkInDate;
       booking.checkOutDate = checkOutDate;
       booking.numberOfGuests = numberOfGuests;
+      booking.fullPrice = fullPrice;
 
       // Save new Data
       booking
