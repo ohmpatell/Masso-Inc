@@ -72,7 +72,7 @@ const NavBar = () => {
               </a>
             </li>
             {user && isUserHotelOwner() && (
-              <div>
+              <>
               <li className="nav-item">
                 <Link className="nav-link" to="/hotel/add" activeClassName="active">
                   Add Hotel
@@ -83,7 +83,7 @@ const NavBar = () => {
                   My Hotels
                 </Link>
               </li>
-              </div>
+              </>
             )}
               <div>
                 <li className="nav-item">
