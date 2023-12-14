@@ -218,7 +218,10 @@ const Reservation = () => {
               <p>Select Your Stay Dates</p>
               <DatePicker
                 selected={startDate}
-                onChange={(date) => setStartDate(date)}
+                onChange={(date) => {
+                  setStartDate(date);
+                  calculateFullPrice(); // Call the function on date change
+                }}
                 selectsStart
                 startDate={startDate}
                 endDate={endDate}
@@ -227,7 +230,10 @@ const Reservation = () => {
               />
               <DatePicker
                 selected={endDate}
-                onChange={(date) => setEndDate(date)}
+                onChange={(date) => {
+                  setEndDate(date);
+                  calculateFullPrice(); // Call the function on date change
+                }}
                 selectsEnd
                 startDate={startDate}
                 endDate={endDate}
@@ -238,32 +244,30 @@ const Reservation = () => {
               <input
                 type="number"
                 value={numOfPeople}
-                onChange={(e) => setNumOfPeople(e.target.value)}
+                onChange={(e) => {
+                  setNumOfPeople(e.target.value);
+                  calculateFullPrice(); // Call the function on input change
+                }}
                 min="1"
-                max="4"              
-                className="form-control"                
+                max="4"
+                className="form-control"
               />
               <p>Full price:</p>
               <p>${fullPrice}</p>
 
-              <button
-                onClick={calculateFullPrice}
-                className="btn btn-primary mt-3"
-              >
-                Calculate
-              </button>
-              {fullPrice!="0" && (
-              <button
-                onClick={handleReservation}
-                className="btn btn-primary mt-3"
-              >
-                Book Now
-              </button>
+              {fullPrice !== "0" && (
+                <button
+                  onClick={handleReservation}
+                  className="btn btn-primary mt-3"
+                >
+                  Book Now
+                </button>
               )}
             </div>
           </div>
         </div>
       )}
+        
       {/* {user && ( */}
         {/* // Reviews Section */}
         <div className="container mb-4">
