@@ -22,9 +22,7 @@ const NavBar = () => {
   };
 
   const isUserHotelOwner = () => {
-    return (
-      user && user.accountType != null && user.accountType === "HotelOwner"
-    );
+    return user && user.accountType != null && user.accountType === "HotelOwner";
   };
 
   return (
@@ -62,86 +60,51 @@ const NavBar = () => {
                 Home
               </Link>
             </li>
-
+            
             <li className="nav-item">
-              <a
-                className="nav-link"
-                onClick={() => scrollToSection("best-offers")}
-                activeClassName="active"
-                style={{ cursor: "pointer" }}
-              >
+              <a className="nav-link" onClick={() => scrollToSection("best-offers")} activeClassName="active" style={{cursor:"pointer"}}>
                 Best Offers
               </a>
             </li>
             <li className="nav-item">
-              <a
-                className="nav-link"
-                onClick={() => scrollToSection("faq")}
-                activeClassName="active"
-                style={{ cursor: "pointer" }}
-              >
+              <a className="nav-link"onClick={() => scrollToSection("faq")}  activeClassName="active" style={{cursor:"pointer"}}>
                 FAQ
               </a>
             </li>
             {user && isUserHotelOwner() && (
               <div>
-                <li className="nav-item">
-                  <Link
-                    className="nav-link"
-                    to="/hotel/add"
-                    activeClassName="active"
-                  >
-                    Add Hotel
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link
-                    className="nav-link"
-                    to="/hotel/created"
-                    activeClassName="active"
-                  >
-                    My Hotels
-                  </Link>
-                </li>
+              <li className="nav-item">
+                <Link className="nav-link" to="/hotel/add" activeClassName="active">
+                  Add Hotel
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link" to="/hotel/created" activeClassName="active">
+                  My Hotels
+                </Link>
+              </li>
               </div>
             )}
-            <div>
               <div>
                 <li className="nav-item">
               <Link className="nav-link" to="/hotel" activeClassName="active">
                 Hotel List
               </Link>
             </li>
-              </div>        
+              </div>          
             {user && !isUserHotelOwner() && (              
               <li className="nav-item">
-                <Link className="nav-link" to="/hotel" activeClassName="active">
-                  Hotel List
-                </Link>
-              </li>
-            </div>
-            {user && !isUserHotelOwner() && (
-              <li className="nav-item">
-                <Link
-                  className="nav-link"
-                  to="/myBookings"
-                  activeClassName="active"
-                >
+                <Link className="nav-link" to="/myBookings" activeClassName="active">
                   My Bookings
                 </Link>
-              </li>
+              </li>                            
             )}
             {user ? (
               <>
-                <div className="nav-item">
-                  <span className="nav-link text-dark">
-                    Hi, {user.firstName}
-                  </span>
+              <div className="nav-item">
+                <span className="nav-link text-dark">Hi, {user.firstName}</span>
                 </div>
-                <button
-                  onClick={handleClick}
-                  className="btn btn-warning nav-item"
-                >
+                <button onClick={handleClick} className="btn btn-warning nav-item">
                   Log out
                 </button>
               </>
