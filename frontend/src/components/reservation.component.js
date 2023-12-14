@@ -240,7 +240,8 @@ const Reservation = () => {
                 value={numOfPeople}
                 onChange={(e) => setNumOfPeople(e.target.value)}
                 min="1"
-                className="form-control"
+                max="4"              
+                className="form-control"                
               />
               <p>Full price:</p>
               <p>${fullPrice}</p>
@@ -263,10 +264,10 @@ const Reservation = () => {
           </div>
         </div>
       )}
-      {user && (
-        // Reviews Section
+      {/* {user && ( */}
+        {/* // Reviews Section */}
         <div className="container mb-4">
-          <h2 className="text-center">Reviews</h2>
+          {/* <h2 className="text-center">Reviews</h2>
           {reviews.length > 0 ? (
             <div>
               {reviews.map((review, index) => (
@@ -275,26 +276,28 @@ const Reservation = () => {
             </div>
           ) : (
             <p>No reviews yet.</p>
-          )}
+          )} */}
 
-          {isUserHotelOwner() && (
+          {user && isUserHotelOwner() && (
             <div>
-              <div className="text-center">
-                <button
-                  onClick={() => navigate(`/hotel/update/${hotel?._id}`)}
-                  className="btn btn-warning mt-3 ml-3"
-                >
-                  Edit Hotel
-                </button>
+              <div className="text-center">                
                 <h2 className="text-center">Bookings</h2>
               </div>
               <div className="hotel-list d-flex flex-wrap container">
                 {renderBookings()}
               </div>
+              <div className="text-center">
+              <button
+                  onClick={() => navigate(`/hotel/update/${hotel?._id}`)}
+                  className="btn btn-warning mt-3 ml-3"
+                >
+                  Edit Hotel
+                </button>
+              </div>    
             </div>
           )}
 
-          {user && !isUserHotelOwner() && (
+          {/* {user && !isUserHotelOwner() && (
             // Leave Review Section for Guests
             <div className="text-center mt-3">
               <button onClick={handleLeaveReview} className="btn btn-primary">
@@ -317,9 +320,9 @@ const Reservation = () => {
                 </div>
               )}
             </div>
-          )}
+          )} */}
         </div>
-      )}
+      {/* // )} */}
     </>
   );
 };

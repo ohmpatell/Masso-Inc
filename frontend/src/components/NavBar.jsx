@@ -21,10 +21,6 @@ const NavBar = () => {
     logout();
   };
 
-  const isUserCustomer = () => {
-    return user && user.accountType != null && user.accountType === "Customer";
-  };
-
   const isUserHotelOwner = () => {
     return user && user.accountType != null && user.accountType === "HotelOwner";
   };
@@ -37,7 +33,8 @@ const NavBar = () => {
       >
         <Link className="navbar-brand" to="/">
           <img
-            src="logo.png"
+            // src="logo.png"
+            src="masso-inc-favicon-black.svg"
             width="100"
             height="70"
             className="d-inline-block align-top"
@@ -88,12 +85,16 @@ const NavBar = () => {
               </li>
               </div>
             )}
-            <li className="nav-item">
+            {!user || (user && !isUserHotelOwner()) && (
+              <div>
+                <li className="nav-item">
               <Link className="nav-link" to="/hotel" activeClassName="active">
                 Hotel List
               </Link>
             </li>
-            {user && isUserCustomer() && (              
+              </div>
+              )}            
+            {user && !isUserHotelOwner() && (              
               <li className="nav-item">
                 <Link className="nav-link" to="/myBookings" activeClassName="active">
                   My Bookings

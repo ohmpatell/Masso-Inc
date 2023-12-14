@@ -16,7 +16,6 @@ import Login from "./components/login.component";
 import Registration from "./components/registration.component";
 import { useAuthContext } from "../src/hooks/useAuthContext";
 import CreatedHotelList from "./components/createdHotelList.component";
-import BookingScreen from "./components/Bookingscreen";
 import Reservation from "./components/reservation.component";
 import Footer from "./components/footer";
 import LoadingSpinner from "./components/LoadingSpinner"; // Import the LoadingSpinner component

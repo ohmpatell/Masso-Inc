@@ -14,7 +14,7 @@ const Hero = () => {
           <div className="hero-box">
           <form className="form-inline">
   <div className="input-group">
-    <input
+    {/* <input
       type="text"
       className="form-control"
       placeholder="Search for hotels..."
@@ -28,7 +28,7 @@ const Hero = () => {
       id="button-addon2"
     >
       Search
-    </button>
+    </button> */}
   </div>
 </form>
 

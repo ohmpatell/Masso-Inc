@@ -1,5 +1,5 @@
 const Hotel = require("../model/hotel.model");
-const { uploadImageToStorage } = require('./uploadImageToStorage.js');
+const { uploadImageToStorage } = require("./uploadImageToStorage.js");
 
 // Get all hotels
 const getHotels = (req, res, next) => {
@@ -53,30 +53,30 @@ const updateHotel = async (req, res, next) => {
   const { name, location, phone, email, description, price } = req.body;
 
   try {
-      const hotel = await Hotel.findById(req.params.id);
+    const hotel = await Hotel.findById(req.params.id);
 
-      if (!hotel) {
-          return res.status(404).json({ error: 'Hotel not found' });
-      }
+    if (!hotel) {
+      return res.status(404).json({ error: "Hotel not found" });
+    }
 
-      // Update the hotel with new data
-      hotel.name = name;
-      hotel.location = location;
-      hotel.phone = phone;
-      hotel.email = email;
-      hotel.description = description;
-      hotel.price = price;
+    // Update the hotel with new data
+    hotel.name = name;
+    hotel.location = location;
+    hotel.phone = phone;
+    hotel.email = email;
+    hotel.description = description;
+    hotel.price = price;
 
-      if (req.files) {
-          const imageUrl = await uploadImagesToStorage(req.file);
-          hotel.imageUrl = imageUrl;
-      }
+    if (req.files) {
+      const imageUrl = await uploadImagesToStorage(req.file);
+      hotel.imageUrl = imageUrl;
+    }
 
-      const updatedHotel = await hotel.save();
-      res.status(200).json(updatedHotel);
+    const updatedHotel = await hotel.save();
+    res.status(200).json(updatedHotel);
   } catch (error) {
-      console.error(error);
-      res.status(400).json({ error: error.message });
+    console.error(error);
+    res.status(400).json({ error: error.message });
   }
 };
 //Delete hotel

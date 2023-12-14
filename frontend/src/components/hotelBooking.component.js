@@ -1,14 +1,11 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "../hooks/useAuthContext";
 
 const HotelBooking = ({ booking }) => {
   const [isHovered, setIsHovered] = useState(false);
   const cardClass = isHovered ? "card shadow-lg" : "card shadow-sm";
   const [customer, setCustomer] = useState();
-
-  const navigate = useNavigate();
 
   const { user } = useAuthContext();
 
@@ -29,27 +26,16 @@ const HotelBooking = ({ booking }) => {
     }
   });
 
-  // Fetch reviews when the component mounts or when the hotel id changes
-
   const getCustomerName = () => {
     return (customer && (customer[0] + " " + customer[1])) || "";
   };
-
-  //   const handleCardClick = () => {
-  //     if (!user) {
-  //       alert("Login for reservation");
-  //       return;
-  //     }
-  //     navigate(`/reservation/${hotel._id}`);
-  //   };
 
   return (
     <div className="col-md-5 m-4">
       <div
         className={cardClass}
-        // onMouseEnter={() => setIsHovered(true)}
-        // onMouseLeave={() => setIsHovered(false)}
-        // onClick={handleCardClick}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
       >
         <div className="card-body">
           <h5 className="card-title">Customer: {getCustomerName()}</h5>
