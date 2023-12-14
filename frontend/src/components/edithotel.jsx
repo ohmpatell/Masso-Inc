@@ -22,7 +22,7 @@ const EditHotel = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8081/api/hotel/${id}`)
+      .get(`https://masso-inc.onrender.com/api/hotel/${id}`)
       .then((res) => {
         const hotelData = res.data;
         console.log("API RESPONSE: " + hotelData);
@@ -77,7 +77,7 @@ const EditHotel = () => {
     formData.append("image", hotel.image);
 
     axios
-      .put(`http://localhost:8081/api/hotel/update/${id}`, formData, {
+      .put(`https://masso-inc.onrender.com/api/hotel/update/${id}`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
           'Authorization': `Bearer ${user.token}`,

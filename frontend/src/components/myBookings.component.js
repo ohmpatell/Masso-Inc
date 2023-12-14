@@ -13,7 +13,7 @@ const MyBookings = () => {
   useEffect(() => {
     const fetchBookings = async () => {
       axios
-        .get("http://localhost:8081/api/booking/getCustomerBookings", {
+        .get("https://masso-inc.onrender.com/api/booking/getCustomerBookings", {
           headers: {
             Authorization: `Bearer ${user.token}`,
           },

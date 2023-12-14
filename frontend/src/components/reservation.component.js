@@ -40,7 +40,7 @@ const Reservation = () => {
       : {};
 
     axios
-      .get(`http://localhost:8081/api/hotel/info/${hotelId}`, config)
+      .get(`https://masso-inc.onrender.com/api/hotel/info/${hotelId}`, config)
       .then((response) => {
         setHotel(response.data);
         setError(null);
@@ -59,7 +59,7 @@ const Reservation = () => {
     const fetchReviews = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:8081/api/hotel/reviews/${hotelId}`
+          `https://masso-inc.onrender.com/api/hotel/reviews/${hotelId}`
         );
         setReviews(response.data);
       } catch (error) {
@@ -73,7 +73,7 @@ const Reservation = () => {
   useEffect(() => {
     const fetchBookings = async () => {
       axios
-        .get(`http://localhost:8081/api/booking//getHotelBookings/${hotelId}`, {
+        .get(`https://masso-inc.onrender.com/api/booking//getHotelBookings/${hotelId}`, {
           headers: {
             Authorization: `Bearer ${user.token}`,
           },
@@ -106,7 +106,7 @@ const Reservation = () => {
 
     axios
       .post(
-        "http://localhost:8081/api/booking/create",
+        "https://masso-inc.onrender.com/api/booking/create",
         reservationDetails,
         config
       )
@@ -131,7 +131,7 @@ const Reservation = () => {
     if (reviewText.length > 0 && reviewText.split(" ").length <= 20) {
       try {
         const response = await axios.post(
-          `http://localhost:8081/api/hotel/review/${hotelId}`,
+          `https://masso-inc.onrender.com/api/hotel/review/${hotelId}`,
           { text: reviewText }
         );
         const newReview = response.data;

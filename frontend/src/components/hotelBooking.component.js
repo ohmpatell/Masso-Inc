@@ -15,7 +15,7 @@ const HotelBooking = ({ booking }) => {
   useEffect(() => {
     const fetchCustomer = async () => {
       axios
-        .get(`http://localhost:8081/api/user/info/${booking.customerId}`, {
+        .get(`https://masso-inc.onrender.com/api/user/info/${booking.customerId}`, {
           headers: {
             Authorization: `Bearer ${user.token}`,
           },

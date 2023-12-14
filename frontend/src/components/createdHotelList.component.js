@@ -12,7 +12,7 @@ const CreatedHotelList = () => {
   useEffect(() => {
     const fetchHotels = async () => {
       axios
-        .get("http://localhost:8081/api/hotel/created", {
+        .get("https://masso-inc.onrender.com/api/hotel/created", {
           headers: {
             Authorization: `Bearer ${user.token}`,
           },

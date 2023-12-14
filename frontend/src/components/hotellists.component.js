@@ -23,7 +23,7 @@ export default class HotelLists extends Component {
   }
 
   fetchHotels() {
-    const url = `https://masso-inc.onrender.com//api/hotel?search=${this.state.searchTerm}`;
+    const url = `https://masso-inc.onrender.com/api/hotel?search=${this.state.searchTerm}`;
     axios
       .get(url)
       .then((res) => this.setState({ hotels: res.data }))

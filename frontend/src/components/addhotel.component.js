@@ -45,7 +45,7 @@ const AddHotel = () => {
     }
 
     axios
-      .post("http://localhost:8081/api/hotel/add", formData, {
+      .post("https://masso-inc.onrender.com/api/hotel/add", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
           Authorization: `Bearer ${user.token}`,

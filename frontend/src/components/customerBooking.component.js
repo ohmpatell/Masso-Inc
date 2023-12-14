@@ -15,7 +15,7 @@ const CustomerBooking = ({ booking }) => {
   useEffect(() => {
     const fetchHotel = async () => {
       axios
-        .get(`http://localhost:8081/api/hotel/info/${booking.hotelId}`, {
+        .get(`https://masso-inc.onrender.com/api/hotel/info/${booking.hotelId}`, {
           headers: {
             Authorization: `Bearer ${user.token}`,
           },
@@ -45,7 +45,7 @@ const CustomerBooking = ({ booking }) => {
 
   const cancelBooking=()=>{
     axios
-    .delete(`http://localhost:8081/api/booking/delete/${booking._id}`, {
+    .delete(`https://masso-inc.onrender.com/api/booking/delete/${booking._id}`, {
       headers: {
         Authorization: `Bearer ${user.token}`,
       },
