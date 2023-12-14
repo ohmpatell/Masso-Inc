@@ -106,6 +106,14 @@ const NavBar = () => {
               </div>
             )}
             <div>
+              <div>
+                <li className="nav-item">
+              <Link className="nav-link" to="/hotel" activeClassName="active">
+                Hotel List
+              </Link>
+            </li>
+              </div>        
+            {user && !isUserHotelOwner() && (              
               <li className="nav-item">
                 <Link className="nav-link" to="/hotel" activeClassName="active">
                   Hotel List
