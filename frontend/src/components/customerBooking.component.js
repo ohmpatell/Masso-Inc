@@ -62,6 +62,7 @@ const CustomerBooking = ({ booking }) => {
   //     navigate(`/reservation/${hotel._id}`);
   //   };
 
+
   return (
     <div className="col-md-5 m-4">
       <div
